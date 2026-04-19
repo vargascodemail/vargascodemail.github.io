@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aplicativos desenvolvidos por VargasCode — PeladaGo, Frase.me, Receitex, Buy and Hold, Quiz da Fé. Baixe agora na Google Play." />
+  <meta property="og:title" content="VargasCode · Apps para Android" />
+  <meta property="og:description" content="Aplicativos feitos com propósito. Do futebol à fé." />
+  <meta property="og:url" content="https://vargascode.com.br" />
+  <title>VargasCode · Aplicativos para Android</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      /* Surfaces */
+      --color-bg:       #EEF2F7;
+      --color-surface:  #FFFFFF;
+      --color-hero:     #08111F;
+      --color-hero-alt: #0E1E36;
+
+      /* Text */
+      --color-text:     #0F172A;
+      --color-text-2:   #4B5563;
+      --color-text-3:   #9CA3AF;
+      --color-hero-text:#F1F5F9;
+      --color-hero-dim: #7A96B8;
+
+      /* Brand */
+      --color-accent:   #2563EB;
+      --color-border:   #E2E8F0;
+      --color-play:     #01875F;
+      --color-play-hover:#016B4C;
+
+      /* Per-app accents */
+      --app-peladago:   #16A34A;
+      --app-fraseme:    #D97706;
+      --app-receitex:   #1D4ED8;
+      --app-buyandhold: #0284C7;
+      --app-quizdafe:   #7C3AED;
+
+      /* Elevation */
+      --shadow-sm:  0 1px 2px rgba(0,0,0,.05);
+      --shadow-md:  0 2px 8px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-lg:  0 8px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06);
+      --shadow-xl:  0 16px 48px rgba(0,0,0,.14), 0 4px 12px rgba(0,0,0,.08);
+
+      /* Layout */
+      --max-width: 1080px;
+      --card-radius: 20px;
+    }
+
+    /* ─────────────────────────────────────────
+       RESET
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    img  { display: block; max-width: 100%; }
+    a    { color: inherit; text-decoration: none; }
+    ul   { list-style: none; }
+
+    /* ─────────────────────────────────────────
+       BASE
+    ───────────────────────────────────────── */
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background: var(--color-bg);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      background: var(--color-hero);
+      position: relative;
+      overflow: hidden;
+      padding: 88px 24px 108px;
+      text-align: center;
+    }
+
+    /* Grid texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+    }
+
+    /* Radial glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(37,99,235,.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #93C5FD;
+      border: 1px solid rgba(147,197,253,.25);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 28px;
+
+      opacity: 0;
+      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .05s both;
+    }
+
+    .hero__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 700;
+      color: var(--color-hero-text);
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      margin-bottom: 20px;
+
+      opacity: 0;
+      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .15s both;
+    }
+
+    .hero__title em {
+      font-style: normal;
+      background: linear-gradient(130deg, #60A5FA 0%, #A78BFA 55%, #34D399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero__sub {
+      font-size: clamp(.95rem, 2vw, 1.125rem);
+      font-weight: 400;
+      color: var(--color-hero-dim);
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+
+      opacity: 0;
+      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .25s both;
+    }
+
+    .hero__pills {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      opacity: 0;
+      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .35s both;
+    }
+
+    .hero__pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748B;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 100px;
+      padding: 6px 14px;
+    }
+
+    .hero__pill svg {
+      width: 14px;
+      height: 14px;
+      color: #60A5FA;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       MAIN
+    ───────────────────────────────────────── */
+    .main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 72px 24px 88px;
+    }
+
+    /* ─────────────────────────────────────────
+       SECTION HEADER
+    ───────────────────────────────────────── */
+    .section-hd {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .section-hd__eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 8px;
+    }
+
+    .section-hd__title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -.025em;
+      color: var(--color-text);
+      line-height: 1.15;
+    }
+
+    .section-hd__count {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-3);
+      white-space: nowrap;
+      padding-bottom: 4px;
+    }
+
+    /* ─────────────────────────────────────────
+       APPS GRID — 6-col trick for centered row
+    ───────────────────────────────────────── */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 22px;
+    }
+
+    .app-card {
+      grid-column: span 2;
+    }
+
+    /* Center 4th and 5th cards in the second row */
+    .app-card:nth-child(4) { grid-column: 2 / span 2; }
+    .app-card:nth-child(5) { grid-column: 4 / span 2; }
+
+    /* ─────────────────────────────────────────
+       APP CARD
+    ───────────────────────────────────────── */
+    .app-card {
+      background: var(--color-surface);
+      border-radius: var(--card-radius);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+
+      /* Scroll reveal — initial state */
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .5s ease, transform .5s ease, box-shadow .25s ease;
+    }
+
+    .app-card.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .app-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* ── Card color band ── */
+    .card__band {
+      height: 72px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .app-card[data-app="peladago"]   .card__band { background: var(--app-peladago); }
+    .app-card[data-app="fraseme"]    .card__band { background: var(--app-fraseme); }
+    .app-card[data-app="receitex"]   .card__band { background: var(--app-receitex); }
+    .app-card[data-app="buyandhold"] .card__band { background: var(--app-buyandhold); }
+    .app-card[data-app="quizdafe"]   .card__band { background: var(--app-quizdafe); }
+
+    /* ── Logo floating on band ── */
+    .card__logo {
+      position: absolute;
+      bottom: -26px;
+      left: 22px;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--color-surface);
+      border: 3px solid var(--color-surface);
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+
+    .card__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Card body ── */
+    .card__body {
+      padding: 44px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    /* ── Category tag ── */
+    .card__tag {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .app-card[data-app="peladago"]   .card__tag { background: rgba(22,163,74,.1);  color: #15803D; }
+    .app-card[data-app="fraseme"]    .card__tag { background: rgba(217,119,6,.1);  color: #B45309; }
+    .app-card[data-app="receitex"]   .card__tag { background: rgba(29,78,216,.1);  color: #1D4ED8; }
+    .app-card[data-app="buyandhold"] .card__tag { background: rgba(2,132,199,.1);  color: #0369A1; }
+    .app-card[data-app="quizdafe"]   .card__tag { background: rgba(124,58,237,.1); color: #6D28D9; }
+
+    /* ── Card name ── */
+    .card__name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -.015em;
+      color: var(--color-text);
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    /* ── Card description ── */
+    .card__desc {
+      font-size: .9rem;
+      color: var(--color-text-2);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 22px;
+    }
+
+    /* ── Google Play button ── */
+    .btn-play {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      background: var(--color-play);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .875rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      padding: 11px 18px;
+      border-radius: 11px;
+      border: none;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-play:hover {
+      background: var(--color-play-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(1,135,95,.4);
+    }
+
+    .btn-play__icon {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .footer__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer__brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer__brand span { color: var(--color-accent); }
+
+    .footer__links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer__link {
+      font-size: .85rem;
+      color: var(--color-text-3);
+      transition: color .2s ease;
+    }
+
+    .footer__link:hover { color: var(--color-text-2); }
+
+    .footer__copy {
+      font-size: .82rem;
+      color: var(--color-text-3);
+    }
+
+    /* ─────────────────────────────────────────
+       ANIMATIONS
+    ───────────────────────────────────────── */
+    @keyframes heroUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .apps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .app-card,
+      .app-card:nth-child(4),
+      .app-card:nth-child(5) {
+        grid-column: span 1;
+      }
+      .app-card:nth-child(5) {
+        grid-column: 1 / span 2;
+        max-width: calc(50% - 11px);
+        justify-self: center;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .apps-grid {
+        grid-template-columns: 1fr;
+      }
+      .app-card,
+      .app-card:nth-child(4),
+      .app-card:nth-child(5) {
+        grid-column: 1 / -1;
+        max-width: 100%;
+      }
+      .hero {
+        padding: 64px 20px 84px;
+      }
+      .section-hd {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       REDUCED MOTION
+    ───────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .hero__badge,
+      .hero__title,
+      .hero__sub,
+      .hero__pills { animation: none; opacity: 1; }
+      .app-card { opacity: 1; transform: none; transition: box-shadow .2s ease; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <header class="hero" role="banner">
+    <div class="hero__inner">
+
+      <div class="hero__badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        Google Play · Android
+      </div>
+
+      <h1 class="hero__title">
+        Apps feitos com<br /><em>propósito</em>
+      </h1>
+
+      <p class="hero__sub">
+        Aplicativos desenvolvidos por VargasCode para facilitar o seu dia a dia —
+        do futebol à fé, dos investimentos à saúde.
+      </p>
+
+      <div class="hero__pills">
+        <div class="hero__pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+          5 aplicativos
+        </div>
+        <div class="hero__pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+          </svg>
+          vargascode.com.br
+        </div>
+        <div class="hero__pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+          Feito no Brasil
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════ -->
+  <main class="main" id="apps">
+
+    <div class="section-hd">
+      <div>
+        <p class="section-hd__eyebrow">Portfólio</p>
+        <h2 class="section-hd__title">Nossos aplicativos</h2>
+      </div>
+      <span class="section-hd__count">5 apps disponíveis</span>
+    </div>
+
+    <div class="apps-grid" role="list">
+
+      <!-- ─── PeladaGo ─── -->
+      <article class="app-card" data-app="peladago" role="listitem">
+        <div class="card__band" aria-hidden="true">
+          <div class="card__logo">
+            <img src="logos/peladago-logo.png" alt="Ícone do PeladaGo" />
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Esportes</span>
+          <h3 class="card__name">PeladaGo</h3>
+          <p class="card__desc">
+            Organize sua pelada de futebol com facilidade. Monte times equilibrados, gerencie a lista de jogadores e faça o sorteio com um único toque.
+          </p>
+          <a href="#" class="btn-play" aria-label="Baixar PeladaGo na Google Play">
+            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
+            </svg>
+            Baixar na Google Play
+          </a>
+        </div>
+      </article>
+
+      <!-- ─── Frase.me ─── -->
+      <article class="app-card" data-app="fraseme" role="listitem">
+        <div class="card__band" aria-hidden="true">
+          <div class="card__logo">
+            <img src="logos/fraseme-logo.png" alt="Ícone do Frase.me" />
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Criatividade</span>
+          <h3 class="card__name">Frase.me</h3>
+          <p class="card__desc">
+            Salve as frases que te inspiram e compartilhe com quem você ama. Crie sua coleção pessoal e descubra novas citações todos os dias.
+          </p>
+          <a href="#" class="btn-play" aria-label="Baixar Frase.me na Google Play">
+            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
+            </svg>
+            Baixar na Google Play
+          </a>
+        </div>
+      </article>
+
+      <!-- ─── Receitex ─── -->
+      <article class="app-card" data-app="receitex" role="listitem">
+        <div class="card__band" aria-hidden="true">
+          <div class="card__logo">
+            <img src="logos/receitex-logo.png" alt="Ícone do Receitex" />
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Saúde</span>
+          <h3 class="card__name">Receitex</h3>
+          <p class="card__desc">
+            Guarde suas receitas médicas com segurança e praticidade. Acompanhe relatórios de saúde e tenha todas as informações sempre à mão.
+          </p>
+          <a href="#" class="btn-play" aria-label="Baixar Receitex na Google Play">
+            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
+            </svg>
+            Baixar na Google Play
+          </a>
+        </div>
+      </article>
+
+      <!-- ─── Buy and Hold ─── -->
+      <article class="app-card" data-app="buyandhold" role="listitem">
+        <div class="card__band" aria-hidden="true">
+          <div class="card__logo">
+            <img src="logos/buyandhold-logo.png" alt="Ícone do Buy and Hold" />
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Finanças</span>
+          <h3 class="card__name">Buy and Hold</h3>
+          <p class="card__desc">
+            Receba sugestões inteligentes de aportes mensais para sua estratégia de investimento. Invista com consistência e disciplina, mês a mês.
+          </p>
+          <a href="#" class="btn-play" aria-label="Baixar Buy and Hold na Google Play">
+            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
+            </svg>
+            Baixar na Google Play
+          </a>
+        </div>
+      </article>
+
+      <!-- ─── Quiz da Fé ─── -->
+      <article class="app-card" data-app="quizdafe" role="listitem">
+        <div class="card__band" aria-hidden="true">
+          <div class="card__logo">
+            <img src="logos/quizdafe-logo.png" alt="Ícone do Quiz da Fé" />
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Religioso</span>
+          <h3 class="card__name">Quiz da Fé</h3>
+          <p class="card__desc">
+            Teste seus conhecimentos bíblicos com centenas de perguntas organizadas por categorias e níveis de dificuldade. Diversão para toda a família.
+          </p>
+          <a href="#" class="btn-play" aria-label="Baixar Quiz da Fé na Google Play">
+            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
+            </svg>
+            Baixar na Google Play
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="https://vargascode.com.br" class="footer__brand">
+        Vargas<span>Code</span>
+      </a>
+      <nav class="footer__links" aria-label="Links do rodapé">
+        <a href="https://github.com/vargascodemail" class="footer__link" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://play.google.com/store/apps/developer?id=VargasCode" class="footer__link" target="_blank" rel="noopener noreferrer">Google Play</a>
+      </nav>
+      <span class="footer__copy">© 2026 · vargascode.com.br</span>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       SCROLL REVEAL SCRIPT
+  ═══════════════════════════════════════ -->
+  <script>
+    (function () {
+      var cards = Array.from(document.querySelectorAll('.app-card'));
+      var stagger = [0, 80, 160, 240, 320];
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var idx = cards.indexOf(entry.target);
+          var delay = stagger[idx] || 0;
+
+          // Apply stagger delay for the entrance, then clear it
+          entry.target.style.transitionDelay = delay + 'ms';
+          entry.target.classList.add('is-visible');
+
+          // Remove delay after animation completes so hover is instant
+          setTimeout(function () {
+            entry.target.style.transitionDelay = '0ms';
+          }, 500 + delay);
+
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.08 });
+
+      cards.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
