@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aplicativos desenvolvidos por VargasCode — PeladaGo, Frase.me, Receitex, Buy and Hold, Quiz da Fé. Baixe agora na Google Play." />
+  <meta name="description" content="Aplicativos desenvolvidos por VargasCode — PeladaGo, BibVoz, Frase.me, Receitex, Buy and Hold e Quiz da Fé." />
   <meta property="og:title" content="VargasCode · Apps para Android" />
   <meta property="og:description" content="Aplicativos feitos com propósito. Do futebol à fé." />
   <meta property="og:url" content="https://vargascode.com.br" />
@@ -40,7 +40,8 @@
       /* Per-app accents */
       --app-peladago:   #16A34A;
       --app-fraseme:    #D97706;
-      --app-receitex:   #1D4ED8;
+      --app-bibvoz:     #C2410C;
+      --app-receitex:   #166534;
       --app-buyandhold: #0284C7;
       --app-quizdafe:   #7C3AED;
 
@@ -83,7 +84,7 @@
       background: var(--color-hero);
       position: relative;
       overflow: hidden;
-      padding: 88px 24px 108px;
+      padding: 56px 24px 72px;
       text-align: center;
     }
 
@@ -117,6 +118,22 @@
       z-index: 1;
       max-width: 680px;
       margin: 0 auto;
+    }
+
+    .hero__brand-mark {
+      width: clamp(80px, 12vw, 112px);
+      margin: 0 auto 18px;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,.22));
+
+      opacity: 0;
+      animation: heroUp .55s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    .hero__brand-mark img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 20px;
     }
 
     .hero__badge {
@@ -264,10 +281,6 @@
       grid-column: span 2;
     }
 
-    /* Center 4th and 5th cards in the second row */
-    .app-card:nth-child(4) { grid-column: 2 / span 2; }
-    .app-card:nth-child(5) { grid-column: 4 / span 2; }
-
     /* ─────────────────────────────────────────
        APP CARD
     ───────────────────────────────────────── */
@@ -305,6 +318,7 @@
 
     .app-card[data-app="peladago"]   .card__band { background: var(--app-peladago); }
     .app-card[data-app="fraseme"]    .card__band { background: var(--app-fraseme); }
+    .app-card[data-app="bibvoz"]     .card__band { background: var(--app-bibvoz); }
     .app-card[data-app="receitex"]   .card__band { background: var(--app-receitex); }
     .app-card[data-app="buyandhold"] .card__band { background: var(--app-buyandhold); }
     .app-card[data-app="quizdafe"]   .card__band { background: var(--app-quizdafe); }
@@ -352,7 +366,8 @@
 
     .app-card[data-app="peladago"]   .card__tag { background: rgba(22,163,74,.1);  color: #15803D; }
     .app-card[data-app="fraseme"]    .card__tag { background: rgba(217,119,6,.1);  color: #B45309; }
-    .app-card[data-app="receitex"]   .card__tag { background: rgba(29,78,216,.1);  color: #1D4ED8; }
+    .app-card[data-app="bibvoz"]     .card__tag { background: rgba(194,65,12,.1);  color: #C2410C; }
+    .app-card[data-app="receitex"]   .card__tag { background: rgba(22,101,52,.12); color: #166534; }
     .app-card[data-app="buyandhold"] .card__tag { background: rgba(2,132,199,.1);  color: #0369A1; }
     .app-card[data-app="quizdafe"]   .card__tag { background: rgba(124,58,237,.1); color: #6D28D9; }
 
@@ -403,6 +418,15 @@
       box-shadow: 0 4px 14px rgba(1,135,95,.4);
     }
 
+    .btn-play--disabled,
+    .btn-play--disabled:hover {
+      background: #CBD5E1;
+      color: #334155;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+    }
+
     .btn-play__icon {
       width: 17px;
       height: 17px;
@@ -435,7 +459,15 @@
       color: var(--color-text);
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 10px;
+    }
+
+    .footer__brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: var(--shadow-sm);
     }
 
     .footer__brand span { color: var(--color-accent); }
@@ -475,30 +507,19 @@
       .apps-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      .app-card,
-      .app-card:nth-child(4),
-      .app-card:nth-child(5) {
-        grid-column: span 1;
-      }
-      .app-card:nth-child(5) {
-        grid-column: 1 / span 2;
-        max-width: calc(50% - 11px);
-        justify-self: center;
-      }
+      .app-card { grid-column: span 1; }
     }
 
     @media (max-width: 540px) {
       .apps-grid {
         grid-template-columns: 1fr;
       }
-      .app-card,
-      .app-card:nth-child(4),
-      .app-card:nth-child(5) {
+      .app-card {
         grid-column: 1 / -1;
         max-width: 100%;
       }
       .hero {
-        padding: 64px 20px 84px;
+        padding: 48px 20px 60px;
       }
       .section-hd {
         flex-direction: column;
@@ -526,6 +547,10 @@
   <header class="hero" role="banner">
     <div class="hero__inner">
 
+      <div class="hero__brand-mark">
+        <img src="logo.png" alt="Logo da VargasCode" />
+      </div>
+
       <div class="hero__badge">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
@@ -547,7 +572,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
           </svg>
-          5 aplicativos
+          6 aplicativos
         </div>
         <div class="hero__pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -577,7 +602,7 @@
         <p class="section-hd__eyebrow">Portfólio</p>
         <h2 class="section-hd__title">Nossos aplicativos</h2>
       </div>
-      <span class="section-hd__count">5 apps disponíveis</span>
+      <span class="section-hd__count">6 apps disponíveis</span>
     </div>
 
     <div class="apps-grid" role="list">
@@ -595,7 +620,7 @@
           <p class="card__desc">
             Organize sua pelada de futebol com facilidade. Monte times equilibrados, gerencie a lista de jogadores e faça o sorteio com um único toque.
           </p>
-          <a href="#" class="btn-play" aria-label="Baixar PeladaGo na Google Play">
+          <a href="https://play.google.com/store/apps/details?id=com.peladago" class="btn-play" aria-label="Baixar PeladaGo na Google Play" target="_blank" rel="noopener noreferrer">
             <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
             </svg>
@@ -617,7 +642,29 @@
           <p class="card__desc">
             Salve as frases que te inspiram e compartilhe com quem você ama. Crie sua coleção pessoal e descubra novas citações todos os dias.
           </p>
-          <a href="#" class="btn-play" aria-label="Baixar Frase.me na Google Play">
+          <a href="https://play.google.com/store/apps/details?id=com.frase.me" class="btn-play" aria-label="Baixar Frase.me na Google Play" target="_blank" rel="noopener noreferrer">
+            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
+            </svg>
+            Baixar na Google Play
+          </a>
+        </div>
+      </article>
+
+      <!-- ─── BibVoz ─── -->
+      <article class="app-card" data-app="bibvoz" role="listitem">
+        <div class="card__band" aria-hidden="true">
+          <div class="card__logo">
+            <img src="logos/bibvoz-logo.png" alt="Ícone do BibVoz" />
+          </div>
+        </div>
+        <div class="card__body">
+          <span class="card__tag">Inglês com Bíblia</span>
+          <h3 class="card__name">BibVoz</h3>
+          <p class="card__desc">
+            Aprenda inglês com a Bíblia ouvindo trechos em inglês e português. Escolha voz, gênero, velocidade e repetições para adaptar a experiência ao seu ritmo de estudo.
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=br.com.vargascode.bibvoz" class="btn-play" aria-label="Baixar BibVoz na Google Play" target="_blank" rel="noopener noreferrer">
             <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
             </svg>
@@ -639,7 +686,7 @@
           <p class="card__desc">
             Guarde suas receitas médicas com segurança e praticidade. Acompanhe relatórios de saúde e tenha todas as informações sempre à mão.
           </p>
-          <a href="#" class="btn-play" aria-label="Baixar Receitex na Google Play">
+          <a href="https://play.google.com/store/apps/details?id=br.com.vargascode.receitex" class="btn-play" aria-label="Baixar Receitex na Google Play" target="_blank" rel="noopener noreferrer">
             <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
             </svg>
@@ -661,7 +708,7 @@
           <p class="card__desc">
             Receba sugestões inteligentes de aportes mensais para sua estratégia de investimento. Invista com consistência e disciplina, mês a mês.
           </p>
-          <a href="#" class="btn-play" aria-label="Baixar Buy and Hold na Google Play">
+          <a href="https://play.google.com/store/apps/details?id=com.buyandhold.investment" class="btn-play" aria-label="Baixar Buy and Hold na Google Play" target="_blank" rel="noopener noreferrer">
             <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
             </svg>
@@ -683,7 +730,7 @@
           <p class="card__desc">
             Teste seus conhecimentos bíblicos com centenas de perguntas organizadas por categorias e níveis de dificuldade. Diversão para toda a família.
           </p>
-          <a href="#" class="btn-play" aria-label="Baixar Quiz da Fé na Google Play">
+          <a href="https://play.google.com/store/apps/details?id=br.com.vargascode.quizdafe" class="btn-play" aria-label="Baixar Quiz da Fé na Google Play" target="_blank" rel="noopener noreferrer">
             <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
             </svg>
@@ -701,11 +748,13 @@
   <footer class="footer">
     <div class="footer__inner">
       <a href="https://vargascode.com.br" class="footer__brand">
+        <img src="logo.png" alt="Logo da VargasCode" class="footer__brand-logo" />
         Vargas<span>Code</span>
       </a>
       <nav class="footer__links" aria-label="Links do rodapé">
         <a href="https://github.com/vargascodemail" class="footer__link" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://play.google.com/store/apps/developer?id=VargasCode" class="footer__link" target="_blank" rel="noopener noreferrer">Google Play</a>
+        <a href="mailto:vargascodemail@gmail.com" class="footer__link">vargascodemail@gmail.com</a>
       </nav>
       <span class="footer__copy">© 2026 · vargascode.com.br</span>
     </div>
@@ -717,7 +766,7 @@
   <script>
     (function () {
       var cards = Array.from(document.querySelectorAll('.app-card'));
-      var stagger = [0, 80, 160, 240, 320];
+      var stagger = [0, 80, 160, 240, 320, 400];
 
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
