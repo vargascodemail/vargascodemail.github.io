@@ -1,795 +1,494 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aplicativos desenvolvidos por VargasCode — PeladaGo, BibVoz, Frase.me, Receitex, Buy and Hold e Quiz da Fé." />
-  <meta property="og:title" content="VargasCode · Apps para Android" />
-  <meta property="og:description" content="Aplicativos feitos com propósito. Do futebol à fé." />
-  <meta property="og:url" content="https://vargascode.com.br" />
-  <title>VargasCode · Aplicativos para Android</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ─────────────────────────────────────────
-       DESIGN TOKENS
-    ───────────────────────────────────────── */
-    :root {
-      /* Surfaces */
-      --color-bg:       #EEF2F7;
-      --color-surface:  #FFFFFF;
-      --color-hero:     #08111F;
-      --color-hero-alt: #0E1E36;
-
-      /* Text */
-      --color-text:     #0F172A;
-      --color-text-2:   #4B5563;
-      --color-text-3:   #9CA3AF;
-      --color-hero-text:#F1F5F9;
-      --color-hero-dim: #7A96B8;
-
-      /* Brand */
-      --color-accent:   #2563EB;
-      --color-border:   #E2E8F0;
-      --color-play:     #01875F;
-      --color-play-hover:#016B4C;
-
-      /* Per-app accents */
-      --app-peladago:   #16A34A;
-      --app-fraseme:    #D97706;
-      --app-bibvoz:     #C2410C;
-      --app-receitex:   #166534;
-      --app-buyandhold: #0284C7;
-      --app-quizdafe:   #7C3AED;
-
-      /* Elevation */
-      --shadow-sm:  0 1px 2px rgba(0,0,0,.05);
-      --shadow-md:  0 2px 8px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-      --shadow-lg:  0 8px 32px rgba(0,0,0,.10), 0 2px 8px rgba(0,0,0,.06);
-      --shadow-xl:  0 16px 48px rgba(0,0,0,.14), 0 4px 12px rgba(0,0,0,.08);
-
-      /* Layout */
-      --max-width: 1080px;
-      --card-radius: 20px;
-    }
-
-    /* ─────────────────────────────────────────
-       RESET
-    ───────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    img  { display: block; max-width: 100%; }
-    a    { color: inherit; text-decoration: none; }
-    ul   { list-style: none; }
-
-    /* ─────────────────────────────────────────
-       BASE
-    ───────────────────────────────────────── */
-    body {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      background: var(--color-bg);
-      color: var(--color-text);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ─────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────── */
-    .hero {
-      background: var(--color-hero);
-      position: relative;
-      overflow: hidden;
-      padding: 56px 24px 72px;
-      text-align: center;
-    }
-
-    /* Grid texture */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
-      background-size: 64px 64px;
-      pointer-events: none;
-    }
-
-    /* Radial glow */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 500px;
-      background: radial-gradient(ellipse, rgba(37,99,235,.18) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero__inner {
-      position: relative;
-      z-index: 1;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .hero__brand-mark {
-      width: clamp(80px, 12vw, 112px);
-      margin: 0 auto 18px;
-      filter: drop-shadow(0 10px 24px rgba(0,0,0,.22));
-
-      opacity: 0;
-      animation: heroUp .55s cubic-bezier(.16,1,.3,1) both;
-    }
-
-    .hero__brand-mark img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 20px;
-    }
-
-    .hero__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: #93C5FD;
-      border: 1px solid rgba(147,197,253,.25);
-      border-radius: 100px;
-      padding: 5px 14px;
-      margin-bottom: 28px;
-
-      opacity: 0;
-      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .05s both;
-    }
-
-    .hero__title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2.6rem, 6vw, 4.4rem);
-      font-weight: 700;
-      color: var(--color-hero-text);
-      line-height: 1.08;
-      letter-spacing: -.03em;
-      margin-bottom: 20px;
-
-      opacity: 0;
-      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .15s both;
-    }
-
-    .hero__title em {
-      font-style: normal;
-      background: linear-gradient(130deg, #60A5FA 0%, #A78BFA 55%, #34D399 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero__sub {
-      font-size: clamp(.95rem, 2vw, 1.125rem);
-      font-weight: 400;
-      color: var(--color-hero-dim);
-      max-width: 500px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-
-      opacity: 0;
-      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .25s both;
-    }
-
-    .hero__pills {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-
-      opacity: 0;
-      animation: heroUp .55s cubic-bezier(.16,1,.3,1) .35s both;
-    }
-
-    .hero__pill {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      font-weight: 500;
-      color: #64748B;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 100px;
-      padding: 6px 14px;
-    }
-
-    .hero__pill svg {
-      width: 14px;
-      height: 14px;
-      color: #60A5FA;
-      flex-shrink: 0;
-    }
-
-    /* ─────────────────────────────────────────
-       MAIN
-    ───────────────────────────────────────── */
-    .main {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 72px 24px 88px;
-    }
-
-    /* ─────────────────────────────────────────
-       SECTION HEADER
-    ───────────────────────────────────────── */
-    .section-hd {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-    }
-
-    .section-hd__eyebrow {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 8px;
-    }
-
-    .section-hd__title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.75rem, 4vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -.025em;
-      color: var(--color-text);
-      line-height: 1.15;
-    }
-
-    .section-hd__count {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-text-3);
-      white-space: nowrap;
-      padding-bottom: 4px;
-    }
-
-    /* ─────────────────────────────────────────
-       APPS GRID — 6-col trick for centered row
-    ───────────────────────────────────────── */
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 22px;
-    }
-
-    .app-card {
-      grid-column: span 2;
-    }
-
-    /* ─────────────────────────────────────────
-       APP CARD
-    ───────────────────────────────────────── */
-    .app-card {
-      background: var(--color-surface);
-      border-radius: var(--card-radius);
-      border: 1px solid var(--color-border);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-
-      /* Scroll reveal — initial state */
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .5s ease, transform .5s ease, box-shadow .25s ease;
-    }
-
-    .app-card.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .app-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-xl);
-    }
-
-    /* ── Card color band ── */
-    .card__band {
-      height: 72px;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .app-card[data-app="peladago"]   .card__band { background: var(--app-peladago); }
-    .app-card[data-app="fraseme"]    .card__band { background: var(--app-fraseme); }
-    .app-card[data-app="bibvoz"]     .card__band { background: var(--app-bibvoz); }
-    .app-card[data-app="receitex"]   .card__band { background: var(--app-receitex); }
-    .app-card[data-app="buyandhold"] .card__band { background: var(--app-buyandhold); }
-    .app-card[data-app="quizdafe"]   .card__band { background: var(--app-quizdafe); }
-
-    /* ── Logo floating on band ── */
-    .card__logo {
-      position: absolute;
-      bottom: -26px;
-      left: 22px;
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      background: var(--color-surface);
-      border: 3px solid var(--color-surface);
-      box-shadow: 0 4px 16px rgba(0,0,0,.18);
-      overflow: hidden;
-    }
-
-    .card__logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* ── Card body ── */
-    .card__body {
-      padding: 44px 22px 22px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    /* ── Category tag ── */
-    .card__tag {
-      display: inline-block;
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 100px;
-      margin-bottom: 10px;
-      width: fit-content;
-    }
-
-    .app-card[data-app="peladago"]   .card__tag { background: rgba(22,163,74,.1);  color: #15803D; }
-    .app-card[data-app="fraseme"]    .card__tag { background: rgba(217,119,6,.1);  color: #B45309; }
-    .app-card[data-app="bibvoz"]     .card__tag { background: rgba(194,65,12,.1);  color: #C2410C; }
-    .app-card[data-app="receitex"]   .card__tag { background: rgba(22,101,52,.12); color: #166534; }
-    .app-card[data-app="buyandhold"] .card__tag { background: rgba(2,132,199,.1);  color: #0369A1; }
-    .app-card[data-app="quizdafe"]   .card__tag { background: rgba(124,58,237,.1); color: #6D28D9; }
-
-    /* ── Card name ── */
-    .card__name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: -.015em;
-      color: var(--color-text);
-      margin-bottom: 8px;
-      line-height: 1.25;
-    }
-
-    /* ── Card description ── */
-    .card__desc {
-      font-size: .9rem;
-      color: var(--color-text-2);
-      line-height: 1.65;
-      flex: 1;
-      margin-bottom: 22px;
-    }
-
-    /* ── Google Play button ── */
-    .btn-play {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      background: var(--color-play);
-      color: #fff;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: .875rem;
-      font-weight: 600;
-      letter-spacing: .01em;
-      padding: 11px 18px;
-      border-radius: 11px;
-      border: none;
-      cursor: pointer;
-      transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
-      width: 100%;
-      text-align: center;
-    }
-
-    .btn-play:hover {
-      background: var(--color-play-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(1,135,95,.4);
-    }
-
-    .btn-play--disabled,
-    .btn-play--disabled:hover {
-      background: #CBD5E1;
-      color: #334155;
-      cursor: default;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .btn-play__icon {
-      width: 17px;
-      height: 17px;
-      flex-shrink: 0;
-    }
-
-    /* ─────────────────────────────────────────
-       FOOTER
-    ───────────────────────────────────────── */
-    .footer {
-      border-top: 1px solid var(--color-border);
-      background: var(--color-surface);
-    }
-
-    .footer__inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 28px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .footer__brand {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--color-text);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer__brand-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      object-fit: cover;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .footer__brand span { color: var(--color-accent); }
-
-    .footer__links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer__link {
-      font-size: .85rem;
-      color: var(--color-text-3);
-      transition: color .2s ease;
-    }
-
-    .footer__link:hover { color: var(--color-text-2); }
-
-    .footer__copy {
-      font-size: .82rem;
-      color: var(--color-text-3);
-    }
-
-    /* ─────────────────────────────────────────
-       ANIMATIONS
-    ───────────────────────────────────────── */
-    @keyframes heroUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ─────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────── */
-    @media (max-width: 860px) {
-      .apps-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .app-card { grid-column: span 1; }
-    }
-
-    @media (max-width: 540px) {
-      .apps-grid {
-        grid-template-columns: 1fr;
-      }
-      .app-card {
-        grid-column: 1 / -1;
-        max-width: 100%;
-      }
-      .hero {
-        padding: 48px 20px 60px;
-      }
-      .section-hd {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    /* ─────────────────────────────────────────
-       REDUCED MOTION
-    ───────────────────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      .hero__badge,
-      .hero__title,
-      .hero__sub,
-      .hero__pills { animation: none; opacity: 1; }
-      .app-card { opacity: 1; transform: none; transition: box-shadow .2s ease; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vargas Code · Apps que cabem no seu dia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Archivo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>
+  window.__TWEAK_DEFAULTS = {
+    "variant": "editorial",
+    "dark": false,
+    "accent": "#1f8a5b",
+    "font": "modern"
+  };
+</script>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════
-       HERO
-  ═══════════════════════════════════════ -->
-  <header class="hero" role="banner">
-    <div class="hero__inner">
+<!-- ============== TOP NAV (variant switcher) ============== -->
+<nav class="topnav">
+  <a class="brand" href="#top">
+    <img src="assets/logo.png" alt="Vargas Code" class="brand-mark">
+    <span class="brand-text"><b>Vargas</b><i>Code</i></span>
+  </a>
+  <nav class="ed-nav-links" aria-label="Navegação principal">
+    <a href="#apps">Apps</a>
+    <a href="#cursos">Cursos</a>
+    <a href="#storybooks">Storybooks</a>
+    <a href="#livros">Livros</a>
+    <a href="#sobre">Sobre</a>
+  </nav>
+  <a class="nav-cta" href="#contato">Falar com a gente</a>
+</nav>
 
-      <div class="hero__brand-mark">
-        <img src="logo.png" alt="Logo da VargasCode" />
-      </div>
+<!-- ====================================================== -->
+<!-- ============== VARIANT 1: EDITORIAL ================== -->
+<!-- ====================================================== -->
+<main class="variant variant-editorial active" id="top">
 
-      <div class="hero__badge">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-        </svg>
-        Google Play · Android
-      </div>
-
-      <h1 class="hero__title">
-        Apps feitos com<br /><em>propósito</em>
-      </h1>
-
-      <p class="hero__sub">
-        Aplicativos desenvolvidos por VargasCode para facilitar o seu dia a dia —
-        do futebol à fé, dos investimentos à saúde.
+  <!-- HERO -->
+  <section class="ed-hero">
+    <div class="ed-hero-rail">
+      <span class="ed-eyebrow">— Vargas Code · estúdio brasileiro · 2026</span>
+    </div>
+    <h1 class="ed-hero-title">
+      Apps, cursos e histórias<br>
+      feitos com <em>cuidado</em> e <em>simplicidade</em>.
+    </h1>
+    <div class="ed-hero-meta">
+      <p class="ed-hero-lede">
+        Estúdio independente que cria produtos digitais úteis: aplicativos
+        móveis, cursos online, livros técnicos e storybooks ilustrados. Cada
+        projeto nasce de um problema real e cresce com quem o usa.
       </p>
-
-      <div class="hero__pills">
-        <div class="hero__pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
-          </svg>
-          6 aplicativos
-        </div>
-        <div class="hero__pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-          </svg>
-          vargascode.com.br
-        </div>
-        <div class="hero__pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-          </svg>
-          Feito no Brasil
-        </div>
-      </div>
-
+      <dl class="ed-stats">
+        <div><dt>06</dt><dd>apps</dd></div>
+        <div><dt>05</dt><dd>cursos</dd></div>
+        <div><dt>30</dt><dd>storybooks</dd></div>
+        <div><dt>03</dt><dd>livros</dd></div>
+      </dl>
     </div>
-  </header>
+  </section>
 
-  <!-- ═══════════════════════════════════════
-       MAIN CONTENT
-  ═══════════════════════════════════════ -->
-  <main class="main" id="apps">
+  <!-- PORTFOLIO -->
+  <section class="ed-portfolio" id="apps">
+    <header class="ed-section-head">
+      <span class="ed-section-tag">Portfólio</span>
+      <h2>Nossos aplicativos</h2>
+      <span class="ed-section-count">6 apps disponíveis</span>
+    </header>
+    <div class="ed-grid"></div>
+  </section>
 
-    <div class="section-hd">
+  <!-- CURSOS -->
+  <section class="ed-courses" id="cursos">
+    <header class="ed-section-head">
+      <span class="ed-section-tag">Plataforma</span>
+      <h2>Cursos online</h2>
+      <a class="ed-section-count" href="https://cursos.vargascode.com.br/" target="_blank" rel="noopener noreferrer">ver plataforma ↗</a>
+    </header>
+    <p class="ed-section-lead">
+      Material complementar dos nossos livros e disciplinas. Inscreva-se de
+      graça e estude o Capítulo 1 de qualquer curso, no seu ritmo.
+    </p>
+    <div class="ed-courses-grid"></div>
+  </section>
+
+  <!-- STORYBOOKS -->
+  <section class="ed-storybooks" id="storybooks">
+    <header class="ed-section-head">
+      <span class="ed-section-tag">Estante ilustrada</span>
+      <h2>Storybooks</h2>
+      <a class="ed-section-count" href="https://storybooks.vargascode.com.br/catalogo.html" target="_blank" rel="noopener noreferrer">ver catálogo ↗</a>
+    </header>
+    <p class="ed-section-lead">
+      Histórias bíblicas ilustradas em aquarela, reunidas em coleções de dez
+      títulos para ler e ouvir em família. Cada coleção abre com uma amostra grátis.
+    </p>
+    <div class="ed-sb-grid"></div>
+  </section>
+
+  <!-- LIVROS -->
+  <section class="ed-books" id="livros">
+    <header class="ed-section-head">
+      <span class="ed-section-tag">Publicações</span>
+      <h2>Livros</h2>
+      <span class="ed-section-count">e-books técnicos</span>
+    </header>
+    <div class="ed-books-grid"></div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="ed-about" id="sobre">
+    <header class="ed-section-head">
+      <span class="ed-section-tag">Sobre</span>
+      <h2>O que é a Vargas Code</h2>
+    </header>
+    <div class="ed-about-body">
+      <p class="ed-about-lead">
+        A Vargas Code é um pequeno estúdio de software que projeta, constrói
+        e mantém produtos digitais com foco em <em>utilidade real</em>.
+      </p>
+      <p>
+        Acreditamos que um bom produto resolve um problema específico, respeita
+        o tempo de quem usa e amadurece junto com sua comunidade. Por isso
+        cada coisa que publicamos passa por ciclos curtos de feedback,
+        com atualizações frequentes e código mantido com cuidado.
+      </p>
+      <p>
+        Além dos apps, mantemos uma plataforma de cursos online, publicamos
+        livros técnicos e ilustramos storybooks bíblicos para a família.
+      </p>
+      <ul class="ed-values">
+        <li><b>Foco</b> — pouco e bem feito.</li>
+        <li><b>Clareza</b> — interfaces que explicam a si mesmas.</li>
+        <li><b>Permanência</b> — apps mantidos, não abandonados.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="ed-contact" id="contato">
+    <header class="ed-section-head">
+      <span class="ed-section-tag">Contato</span>
+      <h2>Vamos conversar</h2>
+      <span class="ed-section-count">resposta em até 48h</span>
+    </header>
+    <form class="ed-form" onsubmit="return handleSubmit(event)">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
+      <label class="ed-field">
+        <span>Nome</span>
+        <input type="text" name="nome" placeholder="Como devemos te chamar?" required>
+      </label>
+      <label class="ed-field">
+        <span>E-mail</span>
+        <input type="email" name="email" placeholder="seu@email.com" required>
+      </label>
+      <label class="ed-field ed-field-full">
+        <span>Assunto</span>
+        <select name="assunto">
+          <option>Suporte com um app</option>
+          <option>Dúvida sobre um curso</option>
+          <option>Storybooks e coleções</option>
+          <option>Parceria ou divulgação</option>
+          <option>Sugestão de feature</option>
+          <option>Outro assunto</option>
+        </select>
+      </label>
+      <label class="ed-field ed-field-full">
+        <span>Mensagem</span>
+        <textarea name="mensagem" rows="5" placeholder="Conta pra gente..." required></textarea>
+      </label>
+      <div class="ed-form-foot">
+        <p class="ed-form-note">Ao enviar, você concorda com o uso dos seus dados apenas para responder ao contato.</p>
+        <button type="submit" class="ed-btn-primary">Enviar mensagem →</button>
+      </div>
+    </form>
+  </section>
+
+  <footer class="ed-footer">
+    <div class="ed-footer-l">
+      <img src="assets/logo.png" alt="" class="brand-mark">
+      <span class="brand-text"><b>Vargas</b><i>Code</i></span>
+    </div>
+    <nav class="ed-footer-links">
+      <a href="https://cursos.vargascode.com.br/" target="_blank" rel="noopener noreferrer">Cursos</a>
+      <a href="https://storybooks.vargascode.com.br/catalogo.html" target="_blank" rel="noopener noreferrer">Storybooks</a>
+      <a href="https://github.com/vargascodemail" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://play.google.com/store/apps/developer?id=Sabrina+Brugnara" target="_blank" rel="noopener noreferrer">Google Play</a>
+      <a href="mailto:vargascodemail@gmail.com">vargascodemail@gmail.com</a>
+    </nav>
+    <span class="ed-footer-r">© 2026 · vargascode.com.br</span>
+  </footer>
+</main>
+
+<!-- STUDIO e BRUTALIST removidos — site usa somente o padrão Editorial -->
+<!--
+
+  <section class="st-hero">
+    <div class="st-prompt">
+      <span class="st-prompt-line"><span class="st-glyph">$</span> whoami</span>
+      <span class="st-prompt-line st-prompt-out">vargas-code · independent mobile studio · BR</span>
+      <span class="st-prompt-line"><span class="st-glyph">$</span> ls ./products</span>
+    </div>
+    <h1 class="st-hero-title">
+      <span class="st-tag">&lt;</span>apps<span class="st-tag">/&gt;</span><br>
+      úteis. <span class="st-accent">simples.</span><br>
+      <span class="st-muted">mantidos.</span>
+    </h1>
+    <div class="st-hero-foot">
+      <span class="st-pill st-pill-live"><span class="st-dot"></span> 6 apps na Play Store</span>
+      <span class="st-meta">v.2026 · build 06.04 · pt-BR</span>
+    </div>
+  </section>
+
+  <section class="st-portfolio" id="apps-studio">
+    <div class="st-sec-head">
+      <span class="st-sec-num">// 01</span>
+      <h2>Portfólio de aplicativos</h2>
+      <span class="st-sec-line"></span>
+      <span class="st-sec-meta">6 itens</span>
+    </div>
+    <div class="st-grid"></div>
+  </section>
+
+  <section class="st-books">
+    <div class="st-sec-head">
+      <span class="st-sec-num">// 02</span>
+      <h2>Livros & escrita</h2>
+      <span class="st-sec-line"></span>
+      <span class="st-sec-meta">3 títulos</span>
+    </div>
+    <div class="st-books-list"></div>
+  </section>
+
+  <section class="st-about">
+    <div class="st-sec-head">
+      <span class="st-sec-num">// 03</span>
+      <h2>Sobre a Vargas Code</h2>
+      <span class="st-sec-line"></span>
+    </div>
+    <div class="st-about-grid">
+      <div class="st-about-card">
+        <span class="st-card-lbl">// manifesto</span>
+        <p>Estúdio independente focado em apps móveis pequenos, úteis e mantidos por anos. Software como ofício — não como hype.</p>
+      </div>
+      <div class="st-about-card">
+        <span class="st-card-lbl">// stack</span>
+        <ul class="st-stack">
+          <li>Flutter / Kotlin</li>
+          <li>Node + Postgres</li>
+          <li>Supabase / Firebase</li>
+          <li>SwiftUI (em breve)</li>
+        </ul>
+      </div>
+      <div class="st-about-card">
+        <span class="st-card-lbl">// processo</span>
+        <ol class="st-process">
+          <li>Problema real, observado.</li>
+          <li>Protótipo enxuto em 2 semanas.</li>
+          <li>Beta com 30 pessoas.</li>
+          <li>Manutenção contínua.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="st-contact" id="contato-studio">
+    <div class="st-sec-head">
+      <span class="st-sec-num">// 04</span>
+      <h2>Contato</h2>
+      <span class="st-sec-line"></span>
+      <span class="st-sec-meta">SLA 48h</span>
+    </div>
+    <form class="st-form" onsubmit="return handleSubmit(event)">
+      <div class="st-form-row">
+        <label><span>const nome =</span><input type="text" name="nome" placeholder='"Maria"' required></label>
+        <label><span>const email =</span><input type="email" name="email" placeholder='"voce@email.com"' required></label>
+      </div>
+      <label><span>const assunto =</span>
+        <select name="assunto">
+          <option>"Suporte"</option>
+          <option>"Parceria"</option>
+          <option>"Sugestão"</option>
+          <option>"Outro"</option>
+        </select>
+      </label>
+      <label><span>const mensagem =</span>
+        <textarea name="mensagem" rows="5" placeholder='`O que está rolando?`' required></textarea>
+      </label>
+      <button type="submit" class="st-btn">
+        <span class="st-glyph">$</span> send --message
+      </button>
+    </form>
+  </section>
+
+  <footer class="st-footer">
+    <div class="st-footer-grid">
       <div>
-        <p class="section-hd__eyebrow">Portfólio</p>
-        <h2 class="section-hd__title">Nossos aplicativos</h2>
+        <img src="assets/logo.png" alt="" class="brand-mark">
+        <span class="brand-text"><b>Vargas</b><i>Code</i></span>
+        <p>Estúdio independente.<br>Feito com café no Brasil.</p>
       </div>
-      <span class="section-hd__count">6 apps disponíveis</span>
-    </div>
-
-    <div class="apps-grid" role="list">
-
-      <!-- ─── PeladaGo ─── -->
-      <article class="app-card" data-app="peladago" role="listitem">
-        <div class="card__band" aria-hidden="true">
-          <div class="card__logo">
-            <img src="logos/peladago-logo.png" alt="Ícone do PeladaGo" />
-          </div>
-        </div>
-        <div class="card__body">
-          <span class="card__tag">Esportes</span>
-          <h3 class="card__name">PeladaGo</h3>
-          <p class="card__desc">
-            Organize sua pelada de futebol com facilidade. Monte times equilibrados, gerencie a lista de jogadores e faça o sorteio com um único toque.
-          </p>
-          <a href="https://play.google.com/store/apps/details?id=com.peladago" class="btn-play" aria-label="Baixar PeladaGo na Google Play" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
-            </svg>
-            Baixar na Google Play
-          </a>
-        </div>
-      </article>
-
-      <!-- ─── Frase.me ─── -->
-      <article class="app-card" data-app="fraseme" role="listitem">
-        <div class="card__band" aria-hidden="true">
-          <div class="card__logo">
-            <img src="logos/fraseme-logo.png" alt="Ícone do Frase.me" />
-          </div>
-        </div>
-        <div class="card__body">
-          <span class="card__tag">Criatividade</span>
-          <h3 class="card__name">Frase.me</h3>
-          <p class="card__desc">
-            Salve as frases que te inspiram e compartilhe com quem você ama. Crie sua coleção pessoal e descubra novas citações todos os dias.
-          </p>
-          <a href="https://play.google.com/store/apps/details?id=com.frase.me" class="btn-play" aria-label="Baixar Frase.me na Google Play" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
-            </svg>
-            Baixar na Google Play
-          </a>
-        </div>
-      </article>
-
-      <!-- ─── BibVoz ─── -->
-      <article class="app-card" data-app="bibvoz" role="listitem">
-        <div class="card__band" aria-hidden="true">
-          <div class="card__logo">
-            <img src="logos/bibvoz-logo.png" alt="Ícone do BibVoz" />
-          </div>
-        </div>
-        <div class="card__body">
-          <span class="card__tag">Inglês com Bíblia</span>
-          <h3 class="card__name">BibVoz</h3>
-          <p class="card__desc">
-            Aprenda inglês com a Bíblia ouvindo trechos em inglês e português. Escolha voz, gênero, velocidade e repetições para adaptar a experiência ao seu ritmo de estudo.
-          </p>
-          <a href="https://play.google.com/store/apps/details?id=br.com.vargascode.bibvoz" class="btn-play" aria-label="Baixar BibVoz na Google Play" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
-            </svg>
-            Baixar na Google Play
-          </a>
-        </div>
-      </article>
-
-      <!-- ─── Receitex ─── -->
-      <article class="app-card" data-app="receitex" role="listitem">
-        <div class="card__band" aria-hidden="true">
-          <div class="card__logo">
-            <img src="logos/receitex-logo.png" alt="Ícone do Receitex" />
-          </div>
-        </div>
-        <div class="card__body">
-          <span class="card__tag">Saúde</span>
-          <h3 class="card__name">Receitex</h3>
-          <p class="card__desc">
-            Guarde suas receitas médicas com segurança e praticidade. Acompanhe relatórios de saúde e tenha todas as informações sempre à mão.
-          </p>
-          <a href="https://play.google.com/store/apps/details?id=br.com.vargascode.receitex" class="btn-play" aria-label="Baixar Receitex na Google Play" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
-            </svg>
-            Baixar na Google Play
-          </a>
-        </div>
-      </article>
-
-      <!-- ─── Buy and Hold ─── -->
-      <article class="app-card" data-app="buyandhold" role="listitem">
-        <div class="card__band" aria-hidden="true">
-          <div class="card__logo">
-            <img src="logos/buyandhold-logo.png" alt="Ícone do Buy and Hold" />
-          </div>
-        </div>
-        <div class="card__body">
-          <span class="card__tag">Finanças</span>
-          <h3 class="card__name">Buy and Hold</h3>
-          <p class="card__desc">
-            Receba sugestões inteligentes de aportes mensais para sua estratégia de investimento. Invista com consistência e disciplina, mês a mês.
-          </p>
-          <a href="https://play.google.com/store/apps/details?id=com.buyandhold.investment" class="btn-play" aria-label="Baixar Buy and Hold na Google Play" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
-            </svg>
-            Baixar na Google Play
-          </a>
-        </div>
-      </article>
-
-      <!-- ─── Quiz da Fé ─── -->
-      <article class="app-card" data-app="quizdafe" role="listitem">
-        <div class="card__band" aria-hidden="true">
-          <div class="card__logo">
-            <img src="logos/quizdafe-logo.png" alt="Ícone do Quiz da Fé" />
-          </div>
-        </div>
-        <div class="card__body">
-          <span class="card__tag">Religioso</span>
-          <h3 class="card__name">Quiz da Fé</h3>
-          <p class="card__desc">
-            Teste seus conhecimentos bíblicos com centenas de perguntas organizadas por categorias e níveis de dificuldade. Diversão para toda a família.
-          </p>
-          <a href="https://play.google.com/store/apps/details?id=br.com.vargascode.quizdafe" class="btn-play" aria-label="Baixar Quiz da Fé na Google Play" target="_blank" rel="noopener noreferrer">
-            <svg class="btn-play__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4.318 2.045C3.547 1.64 2.647 2.2 2.647 3.07v17.862c0 .87.9 1.428 1.671 1.023l16.27-8.93a1.148 1.148 0 000-2.048L4.318 2.045z" fill="currentColor"/>
-            </svg>
-            Baixar na Google Play
-          </a>
-        </div>
-      </article>
-
-    </div>
-  </main>
-
-  <!-- ═══════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <a href="https://vargascode.com.br" class="footer__brand">
-        <img src="logo.png" alt="Logo da VargasCode" class="footer__brand-logo" />
-        Vargas<span>Code</span>
-      </a>
-      <nav class="footer__links" aria-label="Links do rodapé">
-        <a href="https://github.com/vargascodemail" class="footer__link" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://play.google.com/store/apps/developer?id=VargasCode" class="footer__link" target="_blank" rel="noopener noreferrer">Google Play</a>
-        <a href="mailto:vargascodemail@gmail.com" class="footer__link">vargascodemail@gmail.com</a>
-      </nav>
-      <span class="footer__copy">© 2026 · vargascode.com.br</span>
+      <div>
+        <span class="st-foot-lbl">// links</span>
+        <a href="#">GitHub</a>
+        <a href="#">Google Play</a>
+        <a href="#">RSS</a>
+      </div>
+      <div>
+        <span class="st-foot-lbl">// contato</span>
+        <a href="mailto:vargascodemail@gmail.com">vargascodemail@gmail.com</a>
+        <a href="#">@vargascode</a>
+      </div>
+      <div class="st-foot-copy">
+        <span>© 2026</span>
+        <span>vargascode.com.br</span>
+      </div>
     </div>
   </footer>
+-->
 
-  <!-- ═══════════════════════════════════════
-       SCROLL REVEAL SCRIPT
-  ═══════════════════════════════════════ -->
-  <script>
-    (function () {
-      var cards = Array.from(document.querySelectorAll('.app-card'));
-      var stagger = [0, 80, 160, 240, 320, 400];
+<!--
 
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var idx = cards.indexOf(entry.target);
-          var delay = stagger[idx] || 0;
+  <section class="br-hero">
+    <div class="br-marquee">
+      <span>VARGAS&nbsp;CODE&nbsp;◆&nbsp;APPS&nbsp;PRA&nbsp;GENTE&nbsp;DE&nbsp;VERDADE&nbsp;◆&nbsp;ESTÚDIO&nbsp;INDEPENDENTE&nbsp;◆&nbsp;DESDE&nbsp;2020&nbsp;◆&nbsp;</span>
+      <span>VARGAS&nbsp;CODE&nbsp;◆&nbsp;APPS&nbsp;PRA&nbsp;GENTE&nbsp;DE&nbsp;VERDADE&nbsp;◆&nbsp;ESTÚDIO&nbsp;INDEPENDENTE&nbsp;◆&nbsp;DESDE&nbsp;2020&nbsp;◆&nbsp;</span>
+    </div>
+    <div class="br-hero-body">
+      <h1 class="br-hero-title">
+        <span class="br-hero-line br-l1">CONSTRUÍMOS</span>
+        <span class="br-hero-line br-l2">APP<span class="br-hero-dot"></span>S</span>
+        <span class="br-hero-line br-l3">QUE&nbsp;SERVEM.</span>
+      </h1>
+      <aside class="br-hero-side">
+        <p>Pequeno estúdio de software brasileiro. Seis aplicativos publicados, três livros no caminho, zero rodeio.</p>
+        <a class="br-cta" href="#apps-br">VER APLICATIVOS ↓</a>
+      </aside>
+    </div>
+    <div class="br-hero-grid">
+      <div><b>06</b><span>APPS</span></div>
+      <div><b>03</b><span>LIVROS</span></div>
+      <div><b>2026</b><span>ANO</span></div>
+      <div><b>BR</b><span>BASE</span></div>
+    </div>
+  </section>
 
-          // Apply stagger delay for the entrance, then clear it
-          entry.target.style.transitionDelay = delay + 'ms';
-          entry.target.classList.add('is-visible');
+  <section class="br-portfolio" id="apps-br">
+    <header class="br-head">
+      <span class="br-head-num">[ 01 ]</span>
+      <h2>PORTFÓLIO</h2>
+      <span class="br-head-meta">06 APLICATIVOS · GOOGLE PLAY</span>
+    </header>
+    <div class="br-grid"></div>
+  </section>
 
-          // Remove delay after animation completes so hover is instant
-          setTimeout(function () {
-            entry.target.style.transitionDelay = '0ms';
-          }, 500 + delay);
+  <section class="br-books">
+    <header class="br-head">
+      <span class="br-head-num">[ 02 ]</span>
+      <h2>LIVROS</h2>
+      <span class="br-head-meta">EBOOKS TÉCNICOS</span>
+    </header>
+    <div class="br-books-list"></div>
+  </section>
 
-          observer.unobserve(entry.target);
-        });
-      }, { threshold: 0.08 });
+  <section class="br-about">
+    <header class="br-head">
+      <span class="br-head-num">[ 03 ]</span>
+      <h2>SOBRE</h2>
+    </header>
+    <div class="br-about-grid">
+      <p class="br-about-big">
+        SOFTWARE COMO <span class="br-about-mark">OFÍCIO</span>.<br>
+        UM PROBLEMA POR VEZ.<br>
+        SEM PRESSA, SEM ABANDONO.
+      </p>
+      <div class="br-about-cols">
+        <div>
+          <span class="br-about-lbl">FOCO</span>
+          <p>Pouco e bem feito. Cada app resolve <em>uma</em> coisa.</p>
+        </div>
+        <div>
+          <span class="br-about-lbl">CLAREZA</span>
+          <p>Interfaces que explicam a si mesmas. Sem fricção desnecessária.</p>
+        </div>
+        <div>
+          <span class="br-about-lbl">PERMANÊNCIA</span>
+          <p>Atualizamos por anos. Apps que não somem da loja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      cards.forEach(function (el) { observer.observe(el); });
-    })();
-  </script>
+  <section class="br-contact" id="contato-br">
+    <header class="br-head">
+      <span class="br-head-num">[ 04 ]</span>
+      <h2>CONTATO</h2>
+      <span class="br-head-meta">RESPOSTA EM 48H</span>
+    </header>
+    <form class="br-form" onsubmit="return handleSubmit(event)">
+      <div class="br-form-row">
+        <label class="br-field">
+          <span>NOME</span>
+          <input type="text" name="nome" required>
+        </label>
+        <label class="br-field">
+          <span>E-MAIL</span>
+          <input type="email" name="email" required>
+        </label>
+      </div>
+      <label class="br-field">
+        <span>ASSUNTO</span>
+        <select name="assunto">
+          <option>SUPORTE COM APP</option>
+          <option>PARCERIA</option>
+          <option>SUGESTÃO</option>
+          <option>OUTRO</option>
+        </select>
+      </label>
+      <label class="br-field">
+        <span>MENSAGEM</span>
+        <textarea name="mensagem" rows="5" required></textarea>
+      </label>
+      <button type="submit" class="br-btn">ENVIAR ▸</button>
+    </form>
+  </section>
 
+  <footer class="br-footer">
+    <div class="br-footer-top">
+      <div class="br-foot-brand">
+        <img src="assets/logo.png" alt="" class="brand-mark">
+        <span class="brand-text"><b>Vargas</b><i>Code</i></span>
+      </div>
+      <div class="br-foot-links">
+        <a href="#">GITHUB</a>
+        <a href="#">GOOGLE PLAY</a>
+        <a href="mailto:vargascodemail@gmail.com">VARGASCODEMAIL@GMAIL.COM</a>
+      </div>
+    </div>
+    <div class="br-footer-marquee">
+      <span>© 2026 · VARGASCODE.COM.BR · © 2026 · VARGASCODE.COM.BR · © 2026 · VARGASCODE.COM.BR · </span>
+    </div>
+  </footer>
+-->
+
+<!-- =============== TWEAKS PANEL (desativado) ===============
+<aside class="tk-panel" hidden>
+  <header class="tk-hd">
+    <b>Tweaks</b>
+    <button class="tk-x" aria-label="Fechar">✕</button>
+  </header>
+  <div class="tk-body">
+
+    <span class="tk-sect">Variação</span>
+    <div class="tk-seg" data-tweak="variant">
+      <button data-v="editorial" class="active">Editorial</button>
+      <button data-v="studio">Studio</button>
+      <button data-v="brutalist">Brutalist</button>
+    </div>
+
+    <span class="tk-sect">Tema</span>
+    <label class="tk-row tk-row-h">
+      <span>Modo escuro</span>
+      <span class="tk-toggle" data-tweak="dark">
+        <span class="tk-toggle-knob"></span>
+      </span>
+    </label>
+
+    <span class="tk-sect">Cor de destaque</span>
+    <div class="tk-swatches" data-tweak="accent">
+      <button class="active" data-c="#1f8a5b" style="--c:#1f8a5b" aria-label="Verde Vargas"></button>
+      <button data-c="#1d3a6e" style="--c:#1d3a6e" aria-label="Azul-marinho"></button>
+      <button data-c="#c14a2a" style="--c:#c14a2a" aria-label="Terracota"></button>
+      <button data-c="#7a3dc0" style="--c:#7a3dc0" aria-label="Violeta"></button>
+    </div>
+
+    <span class="tk-sect">Tipografia</span>
+    <div class="tk-seg tk-seg-stack" data-tweak="font">
+      <button data-v="modern" class="active">Moderno</button>
+      <button data-v="classic">Clássico</button>
+      <button data-v="techno">Techno</button>
+    </div>
+
+  </div>
+</aside>
+-->
+
+<script src="app.js"></script>
 </body>
 </html>
