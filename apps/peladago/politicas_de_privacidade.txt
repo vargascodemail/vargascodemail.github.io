@@ -1,0 +1,29 @@
+Política de Privacidade – PeladaGo
+Última atualização: 19/04/2026
+
+Introdução
+O aplicativo PeladaGo ("Aplicativo") foi desenvolvido para facilitar a organização de partidas de futebol amador (peladas), permitindo que os usuários gerenciem jogadores, datas e resultados de forma simples e prática. A VargasCode ("nós") está comprometida em proteger a privacidade dos usuários. Esta Política de Privacidade descreve como o Aplicativo trata as informações no contexto de sua utilização.
+
+1. Coleta de Dados Pessoais
+O Aplicativo não coleta, transmite, armazena em servidores externos nem compartilha qualquer dado pessoal identificável do usuário. Todas as informações inseridas permanecem exclusivamente no dispositivo do próprio usuário.
+
+2. Armazenamento Local
+Informações sobre partidas (datas, horários, nomes de jogadores e resultados) inseridas pelo usuário são armazenadas localmente no dispositivo por meio das APIs padrão do sistema operacional Android. Nenhuma informação é enviada a servidores externos ou acessada remotamente.
+
+3. Permissões Solicitadas
+O Aplicativo não solicita permissões sensíveis, como acesso à câmera, microfone, localização, contatos ou armazenamento externo. Apenas as permissões estritamente necessárias para o funcionamento do Aplicativo são utilizadas.
+
+4. Serviços de Terceiros
+O Aplicativo não integra serviços de terceiros para coleta de dados, rastreamento, exibição de publicidade ou análise de comportamento (analytics).
+
+5. Segurança dos Dados
+Como os dados são armazenados exclusivamente no dispositivo do usuário, a segurança das informações depende das proteções do próprio dispositivo, como senha de acesso, biometria e criptografia do sistema operacional.
+
+6. Público-Alvo
+Este Aplicativo não se destina a crianças menores de 13 anos. Não coletamos intencionalmente informações de menores de idade.
+
+7. Alterações nesta Política
+Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças no Aplicativo ou em requisitos legais. Recomendamos que você a revise regularmente. A data da última atualização está sempre indicada no início deste documento.
+
+8. Contato
+Em caso de dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail: vargascodemail@gmail.com
