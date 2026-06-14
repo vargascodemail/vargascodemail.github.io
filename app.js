@@ -51,27 +51,36 @@ const APPS = [
   },
 ];
 
+/* Livros à venda. preco + loja definem o CTA de compra; disponivel:false marca
+   o título como "Em breve" (sem preço nem botão). */
 const BOOKS = [
-  {
-    title: 'Banco de Dados em 9 Passos: Do Modelo Conceitual à IA',
-    tag: 'Banco de Dados',
-    cover: 'assets/livros/livro-bd.jpg',
-    desc: 'Da modelagem conceitual ao SQL avançado, passando por otimização, Power BI, datasets e inteligência artificial — um percurso completo em 9 etapas.',
-    url: 'https://ravarmes.github.io/curso-bd/',
-  },
   {
     title: 'JavaScript DOM',
     tag: 'JavaScript · Frontend',
     cover: 'assets/livros/livro-javascript_dom.jpg',
     desc: 'Apostila didática para dominar a manipulação do DOM com JavaScript puro: seleção de elementos, eventos, AJAX e muito mais.',
+    preco: 'R$ 9,90',
+    loja: 'Google Play',
     url: 'https://play.google.com/store/books/details?id=bw0XEQAAQBAJ',
+    disponivel: true,
   },
   {
     title: 'Lógica de Programação com JavaScript',
     tag: 'Lógica · JavaScript',
     cover: 'assets/livros/livro-javascript_logica.jpg',
     desc: 'Fundamentos sólidos de lógica de programação aplicados com JavaScript — variáveis, estruturas de controle, funções e algoritmos do zero.',
+    preco: 'R$ 9,90',
+    loja: 'Google Play',
     url: 'https://play.google.com/store/books/details?id=E-sWEQAAQBAJ',
+    disponivel: true,
+  },
+  {
+    title: 'Banco de Dados em 9 Passos: Do Modelo Conceitual à IA',
+    tag: 'Banco de Dados',
+    cover: 'assets/livros/livro-bd.jpg',
+    desc: 'Da modelagem conceitual ao SQL avançado, passando por otimização, Power BI, datasets e inteligência artificial — um percurso completo em 9 etapas.',
+    disponivel: false,
+    url: 'https://ravarmes.github.io/curso-bd/',
   },
 ];
 
@@ -154,26 +163,38 @@ const CURSOS = [
 ];
 
 /* Coleções de storybooks de storybooks.vargascode.com.br — cada coleção reúne
-   10 storybooks ilustrados; o primeiro título sai como amostra grátis. */
+   10 storybooks ilustrados; o primeiro título sai como amostra grátis e a
+   coleção completa é vendida na Hotmart. Preço único definido abaixo. */
 const SB_BASE = 'https://storybooks.vargascode.com.br/';
+const PRECO_STORYBOOK = 'R$ 29,90';
 const COLECOES = [
   {
-    nome: 'Heróis', sufixo: 'da Fé',
-    lead: 'Dez histórias bíblicas reimaginadas em aquarela para tardes de leitura em família: a coragem, a fé e a esperança de quem andou com Deus.',
-    capa: SB_BASE + 'storybook-colecao-herois/storybook-noe/images/noah_page1_good_man_1779073705704.png',
-    amostra: SB_BASE + 'storybook-colecao-herois/storybook-noe/storybook.html',
+    nome: 'Heróis', amp: 'da', fim: 'Fé',
+    lead: 'Dez histórias bíblicas reimaginadas em aquarela para tardes de leitura em família — a coragem, a fé e a esperança dos que andaram com Deus.',
+    capa: 'storybook-colecao-herois/storybook-noe/images/noah_page1_good_man_1779073705704.png',
+    hotmart: 'https://pay.hotmart.com/Q106216283Q?off=2crregmg',
+    cor: 'var(--colecao-herois)',
   },
   {
-    nome: 'Flores', sufixo: 'da Bíblia',
-    lead: 'Dez flores e plantas das Escrituras e as lições que elas guardam, do cuidado de Deus à pureza do coração, em ilustrações delicadas.',
-    capa: SB_BASE + 'storybook-colecao-flores/storybook-lirio-dos-vales/images/lirio_page1_1779284455568.png',
-    amostra: SB_BASE + 'storybook-colecao-flores/storybook-lirio-dos-vales/storybook.html',
+    nome: 'Flores', amp: 'da', fim: 'Bíblia',
+    lead: 'Dez flores e plantas das Escrituras e as lições que elas guardam — do cuidado de Deus à pureza do coração, em ilustrações delicadas.',
+    capa: 'storybook-colecao-flores/storybook-lirio-dos-vales/images/lirio_page1_1779284455568.png',
+    hotmart: 'https://pay.hotmart.com/E106224375C',
+    cor: 'var(--colecao-flores)',
   },
   {
-    nome: 'Cidades', sufixo: 'da Bíblia',
-    lead: 'Dez cidades das Escrituras e o que aconteceu entre seus muros: promessas, milagres e coragem, para ler e ouvir em família.',
-    capa: SB_BASE + 'storybook-colecao-cidades/storybook-belem/images/belem_page6.png',
-    amostra: SB_BASE + 'storybook-colecao-cidades/storybook-belem/storybook.html',
+    nome: 'Cidades', amp: 'da', fim: 'Bíblia',
+    lead: 'Dez cidades das Escrituras e o que aconteceu entre seus muros — promessas, milagres e coragem, contados para ler e ouvir em família.',
+    capa: 'storybook-colecao-cidades/storybook-belem/images/belem_page6.png',
+    hotmart: 'https://pay.hotmart.com/W106224495W?off=5fnkp8zn',
+    cor: 'var(--colecao-cidades)',
+  },
+  {
+    nome: 'Discípulos', amp: 'de', fim: 'Jesus', qtd: 12,
+    lead: 'Doze histórias dos discípulos de Jesus inspiradas na série The Chosen — homens comuns, de personalidades marcantes, que deixaram tudo para seguir o Messias.',
+    capa: 'storybook-colecao-discipulos/storybook-pedro/images/pedro_page1.png',
+    hotmart: 'https://pay.hotmart.com/R106327299N',
+    cor: 'var(--colecao-discipulos)',
   },
 ];
 const SB_CATALOGO = SB_BASE + 'catalogo.html';
@@ -196,15 +217,23 @@ function appCardEditorial(a) {
   </article>`;
 }
 function bookCardEditorial(b) {
-  return `<article class="ed-book">
+  const soon = b.disponivel === false;
+  const foot = soon
+    ? `<span class="ed-buy ed-buy--soon" aria-disabled="true">Em breve</span>`
+    : `<div class="ed-buy-row">
+        <span class="ed-price">${b.preco}</span>
+        <a class="ed-buy" href="${b.url}" target="_blank" rel="noopener noreferrer">Comprar na ${b.loja} ↗</a>
+      </div>`;
+  return `<article class="ed-book${soon ? ' is-soon' : ''}">
     <div class="ed-book-cover">
       <img src="${b.cover}" alt="${b.title}" loading="lazy">
+      ${soon ? '<span class="ed-book-ribbon">Em breve</span>' : ''}
     </div>
     <div class="ed-book-meta">
       <span class="ed-book-tag">${b.tag}</span>
       <h3 class="ed-book-name">${b.title}</h3>
       <p class="ed-book-desc">${b.desc}</p>
-      <a href="${b.url}" class="ed-book-link" target="_blank" rel="noopener noreferrer">Acessar livro →</a>
+      ${foot}
     </div>
   </article>`;
 }
@@ -248,16 +277,23 @@ function courseCardEditorial(c) {
 }
 
 function colecaoCardEditorial(col) {
-  return `<article class="ed-sb">
-    <a class="ed-sb-cover" href="${col.amostra}" target="_blank" rel="noopener noreferrer">
-      <img src="${col.capa}" alt="Coleção ${col.nome} ${col.sufixo}" loading="lazy">
+  const capa = SB_BASE + col.capa;
+  const amostra = SB_BASE + col.capa.replace(/\/images\/.*$/, '/storybook.html');
+  const qtd = col.qtd || 10;
+  return `<article class="ed-sb" style="--sb-color:${col.cor}">
+    <a class="ed-sb-cover" href="${amostra}" target="_blank" rel="noopener noreferrer">
+      <img src="${capa}" alt="Coleção ${col.nome} ${col.amp} ${col.fim}" loading="lazy">
       <span class="ed-sb-badge">Ler amostra grátis →</span>
     </a>
     <div class="ed-sb-body">
-      <span class="ed-sb-tag">Coleção · 10 storybooks</span>
-      <h3 class="ed-sb-name">${col.nome} <em>${col.sufixo}</em></h3>
+      <span class="ed-sb-tag">Coleção · ${qtd} storybooks</span>
+      <h3 class="ed-sb-name">${col.nome} ${col.amp} <em>${col.fim}</em></h3>
       <p class="ed-sb-desc">${col.lead}</p>
-      <a class="ed-sb-cta" href="${SB_CATALOGO}" target="_blank" rel="noopener noreferrer">Ver coleção →</a>
+      <div class="ed-buy-row">
+        <span class="ed-price">${PRECO_STORYBOOK}</span>
+        <a class="ed-buy" href="${col.hotmart}" target="_blank" rel="noopener noreferrer">Comprar na Hotmart ↗</a>
+      </div>
+      <a class="ed-sb-cta" href="${SB_CATALOGO}" target="_blank" rel="noopener noreferrer">Ver no catálogo →</a>
     </div>
   </article>`;
 }
