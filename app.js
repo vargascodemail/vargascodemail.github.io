@@ -157,8 +157,8 @@ const CURSOS = [
     subtitulo: 'Computação Evolutiva e Otimização',
     desc: 'Resolva problemas de otimização complexos com algoritmos genéticos: seleção, crossover, mutação e aplicações em scheduling e roteamento.',
     hue: 305, chroma: 0.15, nivel: 'Intermediário', horas: 10, capitulos: 5,
-    acesso: 'gratuito', disponivel: false,
-    url: 'https://cursos.vargascode.com.br/',
+    acesso: 'gratuito', disponivel: true,
+    url: 'https://cursos.vargascode.com.br/cursos/curso-ag/',
   },
 ];
 
@@ -176,11 +176,18 @@ const COLECOES = [
     cor: 'var(--colecao-herois)',
   },
   {
-    nome: 'Flores', amp: 'da', fim: 'Bíblia',
-    lead: 'Dez flores e plantas das Escrituras e as lições que elas guardam — do cuidado de Deus à pureza do coração, em ilustrações delicadas.',
-    capa: 'storybook-colecao-flores/storybook-lirio-dos-vales/images/lirio_page1_1779284455568.png',
-    hotmart: 'https://pay.hotmart.com/E106224375C',
-    cor: 'var(--colecao-flores)',
+    nome: 'Discípulos', amp: 'de', fim: 'Jesus', qtd: 12,
+    lead: 'Doze histórias dos discípulos de Jesus inspiradas na série The Chosen — homens comuns, de personalidades marcantes, que deixaram tudo para seguir o Messias.',
+    capa: 'storybook-colecao-discipulos/storybook-pedro/images/pedro_page1.png',
+    hotmart: 'https://pay.hotmart.com/R106327299N',
+    cor: 'var(--colecao-discipulos)',
+  },
+  {
+    nome: 'Mulheres', amp: 'da', fim: 'Bíblia',
+    lead: 'Dez histórias inspiradoras de mulheres de fé das Escrituras — lições de coragem, sabedoria e amor para ler e ouvir em família.',
+    capa: 'storybook-colecao-mulheres/storybook-sara/images/sara_page1.png',
+    hotmart: 'https://pay.hotmart.com/V106493775I',
+    cor: 'var(--colecao-mulheres)',
   },
   {
     nome: 'Cidades', amp: 'da', fim: 'Bíblia',
@@ -190,11 +197,18 @@ const COLECOES = [
     cor: 'var(--colecao-cidades)',
   },
   {
-    nome: 'Discípulos', amp: 'de', fim: 'Jesus', qtd: 12,
-    lead: 'Doze histórias dos discípulos de Jesus inspiradas na série The Chosen — homens comuns, de personalidades marcantes, que deixaram tudo para seguir o Messias.',
-    capa: 'storybook-colecao-discipulos/storybook-pedro/images/pedro_page1.png',
-    hotmart: 'https://pay.hotmart.com/R106327299N',
-    cor: 'var(--colecao-discipulos)',
+    nome: 'Flores', amp: 'da', fim: 'Bíblia',
+    lead: 'Dez flores e plantas das Escrituras e as lições que elas guardam — do cuidado de Deus à pureza do coração, em ilustrações delicadas.',
+    capa: 'storybook-colecao-flores/storybook-lirio-dos-vales/images/lirio_page1_1779284455568.png',
+    hotmart: 'https://pay.hotmart.com/E106224375C',
+    cor: 'var(--colecao-flores)',
+  },
+  {
+    nome: 'Águas', amp: 'da', fim: 'Bíblia',
+    lead: 'Dez milagres e passagens extraordinárias que aconteceram nas águas das Escrituras — rios e mares que testemunharam o poder e o cuidado de Deus.',
+    capa: 'storybook-colecao-aguas/storybook-mar-da-galileia/images/galileia_page1.png',
+    hotmart: 'https://pay.hotmart.com/A106494310F',
+    cor: 'var(--colecao-aguas)',
   },
 ];
 const SB_CATALOGO = SB_BASE + 'catalogo.html';
