@@ -57,7 +57,7 @@ const BOOKS = [
   {
     title: 'JavaScript DOM',
     tag: 'JavaScript · Frontend',
-    cover: 'assets/livros/livro-javascript_dom.jpg',
+    cover: 'assets/livros/capa_javascript_dom.jpg',
     desc: 'Apostila didática para dominar a manipulação do DOM com JavaScript puro: seleção de elementos, eventos, AJAX e muito mais.',
     preco: 'R$ 9,90',
     loja: 'Google Play',
@@ -67,7 +67,7 @@ const BOOKS = [
   {
     title: 'Lógica de Programação com JavaScript',
     tag: 'Lógica · JavaScript',
-    cover: 'assets/livros/livro-javascript_logica.jpg',
+    cover: 'assets/livros/capa_javascript.jpg',
     desc: 'Fundamentos sólidos de lógica de programação aplicados com JavaScript — variáveis, estruturas de controle, funções e algoritmos do zero.',
     preco: 'R$ 9,90',
     loja: 'Google Play',
@@ -77,7 +77,7 @@ const BOOKS = [
   {
     title: 'Banco de Dados em 9 Passos: Do Modelo Conceitual à IA',
     tag: 'Banco de Dados',
-    cover: 'assets/livros/livro-bd.jpg',
+    cover: 'assets/livros/capa_bd.jpg',
     desc: 'Da modelagem conceitual ao SQL avançado, passando por otimização, Power BI, datasets e inteligência artificial — um percurso completo em 9 etapas.',
     preco: 'R$ 9,90',
     loja: 'Google Play',
