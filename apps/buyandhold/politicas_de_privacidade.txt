@@ -1,29 +1,41 @@
 Política de Privacidade – Buy and Hold
-Última atualização: 19/04/2026
+Última atualização: 25/09/2026
 
 Introdução
 O aplicativo Buy and Hold ("Aplicativo") foi desenvolvido para auxiliar investidores a organizarem e acompanharem suas carteiras de investimentos com foco na estratégia de longo prazo. A VargasCode ("nós") está comprometida em proteger a privacidade dos usuários. Esta Política de Privacidade descreve como o Aplicativo trata as informações no contexto de sua utilização.
 
-1. Coleta de Dados Pessoais
-O Aplicativo não coleta, transmite, armazena em servidores externos nem compartilha qualquer dado pessoal identificável do usuário. Todas as informações inseridas permanecem exclusivamente no dispositivo do próprio usuário.
+1. Dados Armazenados no Dispositivo
+O Aplicativo não exige cadastro nem login e não envia a carteira do usuário para servidores da VargasCode. Ficam armazenados somente no dispositivo: os ativos da carteira (código, tipo, quantidade e preço), as preferências de alocação, o limite de ativos ampliado por anúncios premiados e a indicação de que a compra do Premium foi realizada. Esses dados são apagados ao limpar os dados do Aplicativo ou desinstalá-lo.
 
-2. Armazenamento Local
-Os dados de carteira (ativos, quantidades, preços e anotações) inseridos pelo usuário são armazenados localmente no dispositivo por meio das APIs padrão do sistema operacional Android. Nenhuma informação é enviada a servidores externos ou acessada remotamente.
+2. Cotações de Ativos
+Para mostrar preços atualizados, o Aplicativo consulta serviços públicos de cotação (brapi.dev e Yahoo Finance), enviando apenas o código do ativo pesquisado (por exemplo, PETR4). Quantidades, valores investidos e demais dados da carteira não são enviados.
 
-3. Permissões Solicitadas
-O Aplicativo não solicita permissões sensíveis, como acesso à câmera, microfone, localização, contatos ou armazenamento externo. Apenas as permissões estritamente necessárias para o funcionamento do Aplicativo são utilizadas.
+3. Publicidade (Google AdMob)
+A versão gratuita exibe anúncios do Google AdMob: um banner, ocasionalmente um anúncio em tela cheia e, quando o usuário escolhe, anúncios em vídeo premiados (a cada 5 assistidos, a carteira ganha espaço para mais um ativo). Para exibir e medir anúncios, o Google pode coletar e utilizar o ID de publicidade do dispositivo, informações do dispositivo e dados de interação com os anúncios, inclusive para exibir anúncios personalizados.
 
-4. Serviços de Terceiros
-O Aplicativo não integra serviços de terceiros para coleta de dados, rastreamento, exibição de publicidade ou análise de comportamento (analytics).
+4. Consentimento e Escolhas sobre Anúncios
+Quando a legislação exige (por exemplo, para usuários do Espaço Econômico Europeu e do Reino Unido), o Aplicativo solicita o consentimento do usuário na primeira abertura, por meio do formulário do Google, antes de solicitar anúncios. Sem esse consentimento, o Aplicativo não solicita anúncios. A escolha pode ser revista a qualquer momento em Configurações > Privacidade dos anúncios. Em qualquer região, o usuário pode redefinir ou excluir o ID de publicidade e desativar a personalização nas configurações do Android (Google > Anúncios). Mais informações: https://policies.google.com/technologies/ads e https://policies.google.com/privacy
 
-5. Segurança dos Dados
-Como os dados são armazenados exclusivamente no dispositivo do usuário, a segurança das informações depende das proteções do próprio dispositivo, como senha de acesso, biometria e criptografia do sistema operacional.
+5. Compras no Aplicativo
+A compra do Premium (ativos ilimitados e sem anúncios) é processada pelo Google Play. A VargasCode não recebe nem armazena dados de pagamento; o Aplicativo apenas consulta o Google Play para verificar se a compra existe, liberar os recursos e permitir a opção "Restaurar Compras".
 
-6. Público-Alvo
+6. Permissões Solicitadas
+O Aplicativo não solicita permissões sensíveis, como acesso à câmera, microfone, localização, contatos ou armazenamento externo. Utiliza apenas acesso à internet (para cotações, anúncios e compras), o ID de publicidade (para anúncios) e o serviço de faturamento do Google Play.
+
+7. Compartilhamento de Dados
+A VargasCode não vende nem compartilha informações pessoais dos usuários. Os dados tratados pelo Google AdMob e pelo Google Play seguem as políticas do Google indicadas acima.
+
+8. Segurança dos Dados
+Os dados do Aplicativo ficam no dispositivo do usuário; sua segurança depende das proteções do próprio dispositivo, como senha de acesso, biometria e criptografia do sistema operacional.
+
+9. Público-Alvo
 Este Aplicativo não se destina a crianças menores de 13 anos. Não coletamos intencionalmente informações de menores de idade.
 
-7. Alterações nesta Política
+10. Direitos do Usuário
+Conforme a Lei Geral de Proteção de Dados (LGPD), o usuário pode solicitar informações sobre o tratamento de seus dados e exercer seus direitos pelo contato abaixo.
+
+11. Alterações nesta Política
 Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças no Aplicativo ou em requisitos legais. Recomendamos que você a revise regularmente. A data da última atualização está sempre indicada no início deste documento.
 
-8. Contato
+12. Contato
 Em caso de dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail: vargascodemail@gmail.com

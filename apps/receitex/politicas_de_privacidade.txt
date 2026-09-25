@@ -1,29 +1,44 @@
 Política de Privacidade – Receitex
-Última atualização: 19/04/2026
+Última atualização: 25/09/2026
 
 Introdução
-O aplicativo Receitex ("Aplicativo") foi desenvolvido para que os usuários possam descobrir, salvar e gerenciar receitas culinárias de forma prática e acessível. A VargasCode ("nós") está comprometida em proteger a privacidade dos usuários. Esta Política de Privacidade descreve como o Aplicativo trata as informações no contexto de sua utilização.
+O aplicativo Receitex ("Aplicativo") foi desenvolvido para que os usuários possam organizar e consultar suas receitas médicas no próprio celular. A VargasCode ("nós") está comprometida em proteger a privacidade dos usuários. Esta Política de Privacidade descreve como o Aplicativo trata as informações no contexto de sua utilização.
 
-1. Coleta de Dados Pessoais
-O Aplicativo não coleta, transmite, armazena em servidores externos nem compartilha qualquer dado pessoal identificável do usuário. Todas as informações inseridas permanecem exclusivamente no dispositivo do próprio usuário.
+1. Dados Armazenados no Dispositivo
+O Aplicativo não exige cadastro nem login e não envia as receitas para servidores da VargasCode. Ficam armazenados somente no dispositivo do usuário: as receitas cadastradas (nome do médico e do paciente, descrição e categorias de sintomas, data da consulta e, se o usuário quiser, a foto da receita), a preferência de tema, o limite de receitas ampliado por anúncios premiados e a indicação de que a compra do Receitex Completo foi realizada. Esses dados são apagados ao limpar os dados do Aplicativo ou desinstalá-lo.
 
-2. Armazenamento Local
-As receitas salvas e as preferências do usuário são armazenadas localmente no dispositivo por meio das APIs padrão do sistema operacional Android. Nenhuma informação é enviada a servidores externos ou acessada remotamente.
+2. Dados de Saúde
+As receitas podem conter informações de saúde, que a Lei Geral de Proteção de Dados (LGPD) trata como dados sensíveis. Elas permanecem apenas no dispositivo do usuário e não são enviadas à VargasCode nem aos serviços de anúncios. O Aplicativo só as envia para fora do dispositivo quando o próprio usuário escolhe compartilhar uma receita (em texto ou PDF) pelo menu de compartilhamento do Android.
 
-3. Permissões Solicitadas
-O Aplicativo não solicita permissões sensíveis, como acesso à câmera, microfone, localização, contatos ou armazenamento externo. Apenas as permissões estritamente necessárias para o funcionamento do Aplicativo são utilizadas.
+3. Câmera e Galeria de Fotos
+A câmera e a galeria são usadas apenas quando o usuário escolhe fotografar uma receita ou anexar uma imagem já existente. A imagem fica no dispositivo e é exibida junto da receita.
 
-4. Serviços de Terceiros
-O Aplicativo não integra serviços de terceiros para coleta de dados, rastreamento, exibição de publicidade ou análise de comportamento (analytics).
+4. Publicidade (Google AdMob)
+A versão gratuita exibe anúncios do Google AdMob: um banner na parte inferior da tela, ocasionalmente um anúncio em tela cheia e, quando o usuário escolhe, anúncios em vídeo premiados que ampliam o limite de receitas salvas. Para exibir e medir anúncios, o Google pode coletar e utilizar o ID de publicidade do dispositivo, informações do dispositivo e dados de interação com os anúncios, inclusive para exibir anúncios personalizados. O conteúdo das receitas não é usado para escolher anúncios.
 
-5. Segurança dos Dados
-Como os dados são armazenados exclusivamente no dispositivo do usuário, a segurança das informações depende das proteções do próprio dispositivo, como senha de acesso, biometria e criptografia do sistema operacional.
+5. Consentimento e Escolhas sobre Anúncios
+Quando a legislação exige (por exemplo, para usuários do Espaço Econômico Europeu e do Reino Unido), o Aplicativo solicita o consentimento do usuário na primeira abertura, por meio do formulário do Google, antes de solicitar anúncios. Sem esse consentimento, o Aplicativo não solicita anúncios. A escolha pode ser revista a qualquer momento em "Privacidade dos anúncios", na tela inicial. Em qualquer região, o usuário pode redefinir ou excluir o ID de publicidade e desativar a personalização nas configurações do Android (Google > Anúncios). Mais informações: https://policies.google.com/technologies/ads e https://policies.google.com/privacy
 
-6. Público-Alvo
+6. Compras no Aplicativo
+A compra do Receitex Completo (receitas ilimitadas e sem anúncios) é processada pelo Google Play. A VargasCode não recebe nem armazena dados de pagamento; o Aplicativo apenas consulta o Google Play para verificar se a compra existe, liberar o recurso e permitir a opção "Restaurar compras".
+
+7. Permissões Solicitadas
+Câmera e leitura de imagens (somente para fotografar ou anexar receitas, quando o usuário escolhe), acesso à internet (para anúncios e compras), o ID de publicidade (para anúncios) e o serviço de faturamento do Google Play. O Aplicativo não acessa microfone, localização ou contatos.
+
+8. Compartilhamento de Dados
+A VargasCode não vende nem compartilha informações pessoais dos usuários. Os dados tratados pelo Google AdMob e pelo Google Play seguem as políticas do Google indicadas acima.
+
+9. Segurança dos Dados
+Os dados do Aplicativo ficam no dispositivo do usuário; sua segurança depende das proteções do próprio dispositivo, como senha de acesso, biometria e criptografia do sistema operacional.
+
+10. Público-Alvo
 Este Aplicativo não se destina a crianças menores de 13 anos. Não coletamos intencionalmente informações de menores de idade.
 
-7. Alterações nesta Política
+11. Direitos do Usuário
+Conforme a Lei Geral de Proteção de Dados (LGPD), o usuário pode solicitar informações sobre o tratamento de seus dados e exercer seus direitos pelo contato abaixo.
+
+12. Alterações nesta Política
 Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças no Aplicativo ou em requisitos legais. Recomendamos que você a revise regularmente. A data da última atualização está sempre indicada no início deste documento.
 
-8. Contato
+13. Contato
 Em caso de dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail: vargascodemail@gmail.com
