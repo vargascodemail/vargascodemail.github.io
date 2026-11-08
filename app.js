@@ -51,8 +51,9 @@ const APPS = [
   },
 ];
 
-/* Livros à venda. preco + loja definem o CTA de compra; disponivel:false marca
-   o título como "Em breve" (sem preço nem botão). */
+/* Livros à venda na Amazon e Google Play.
+   amazon + google definem os botões de compra de cada loja;
+   disponivel:false marca o título como "Em breve" (sem preço nem botão). */
 const BOOKS = [
   {
     title: 'JavaScript DOM',
@@ -60,8 +61,8 @@ const BOOKS = [
     cover: 'assets/livros/capa_javascript_dom.jpg',
     desc: 'Apostila didática para dominar a manipulação do DOM com JavaScript puro: seleção de elementos, eventos, AJAX e muito mais.',
     preco: 'R$ 9,90',
-    loja: 'Google Play',
-    url: 'https://play.google.com/store/books/details?id=ZJH6EQAAQBAJ',
+    amazon: 'https://www.amazon.com.br/dp/B0HH9QSRXB',
+    google: 'https://play.google.com/store/books/details?id=ZJH6EQAAQBAJ',
     disponivel: true,
   },
   {
@@ -70,8 +71,8 @@ const BOOKS = [
     cover: 'assets/livros/capa_javascript.jpg',
     desc: 'Fundamentos sólidos de lógica de programação aplicados com JavaScript — variáveis, estruturas de controle, funções e algoritmos do zero.',
     preco: 'R$ 9,90',
-    loja: 'Google Play',
-    url: 'https://play.google.com/store/books/details?id=cJD6EQAAQBAJ',
+    amazon: 'https://www.amazon.com.br/dp/B0HH9N1JVP',
+    google: 'https://play.google.com/store/books/details?id=cJD6EQAAQBAJ',
     disponivel: true,
   },
   {
@@ -80,8 +81,17 @@ const BOOKS = [
     cover: 'assets/livros/capa_bd.jpg',
     desc: 'Da modelagem conceitual ao SQL avançado, passando por otimização, Power BI, datasets e inteligência artificial — um percurso completo em 9 etapas.',
     preco: 'R$ 9,90',
-    loja: 'Google Play',
-    url: 'https://play.google.com/store/books/details?id=Znr5EQAAQBAJ',
+    amazon: 'https://www.amazon.com.br/dp/B0HHGNYM36',
+    google: 'https://play.google.com/store/books/details?id=Znr5EQAAQBAJ',
+    disponivel: true,
+  },
+  {
+    title: 'Arquitetura RAG e Agentes Autônomos em 8 Passos',
+    tag: 'IA · RAG · Agentes',
+    cover: 'assets/livros/capa_rag.jpg',
+    desc: 'Sistemas RAG avançados, busca semântica, LangChain, LangGraph, agentes autônomos, avaliação e microsserviço com FastAPI — da teoria à produção.',
+    preco: 'R$ 29,90',
+    amazon: 'https://www.amazon.com.br/dp/B0HL4ZLMLH',
     disponivel: true,
   },
 ];
@@ -104,7 +114,7 @@ const CURSOS = [
     nome: 'Banco de Dados',
     subtitulo: 'Do Modelo Conceitual à IA',
     desc: 'Do modelo conceitual à inteligência artificial: entidades e relacionamentos, SQL, otimização, Power BI, datasets para ML e prompts.',
-    hue: 22, chroma: 0.16, nivel: 'Iniciante', horas: 28, capitulos: 9,
+    hue: 235, chroma: 0.16, nivel: 'Iniciante', horas: 28, capitulos: 9,
     acesso: 'ebook', disponivel: true,
     url: 'https://cursos.vargascode.com.br/cursos/curso-bd/',
   },
@@ -145,6 +155,15 @@ const CURSOS = [
     url: 'https://cursos.vargascode.com.br/cursos/curso-grafos/',
   },
   {
+    code: 'SREC',
+    nome: 'Sistemas de Recomendação',
+    subtitulo: 'Filtragem Colaborativa · Fatores Latentes · Deep Learning · GNN · Federado',
+    desc: 'Construa sistemas de recomendação do zero aos modelos avançados: filtragem colaborativa, SVD, redes neurais, grafos, recomendação federada e um projeto prático completo.',
+    hue: 335, chroma: 0.15, nivel: 'Avançado', horas: 24, capitulos: 13,
+    acesso: 'gratuito', disponivel: true,
+    url: 'https://cursos.vargascode.com.br/cursos/curso-recomendacao/',
+  },
+  {
     code: 'AGEN',
     nome: 'Algoritmos Genéticos',
     subtitulo: 'Computação Evolutiva · Seleção · Crossover · Mutação',
@@ -163,6 +182,24 @@ const CURSOS = [
     url: 'https://cursos.vargascode.com.br/cursos/curso-aa/',
   },
   {
+    code: 'PYTH',
+    nome: 'Python: Fundamentos',
+    subtitulo: 'Sintaxe · Controle · Coleções · Funções · Arquivos · Testes',
+    desc: 'Domine Python do zero aos testes automatizados: sintaxe, estruturas de controle, manipulação de strings, listas, dicionários, arquivos e pytest.',
+    hue: 165, chroma: 0.16, nivel: 'Iniciante', horas: 30, capitulos: 24,
+    acesso: 'gratuito', disponivel: true,
+    url: 'https://cursos.vargascode.com.br/cursos/curso-python/',
+  },
+  {
+    code: 'RAG',
+    nome: 'Arquitetura RAG e Agentes Autônomos',
+    subtitulo: 'Sistemas RAG Avançados · LangChain · LangGraph · Avaliação · Produção',
+    desc: 'Construa um sistema RAG que cresce a cada capítulo e é medido a cada mudança: ingestão, recuperação avaliada, LCEL, agentes com ferramentas, autocorreção e publicação como serviço.',
+    hue: 20, chroma: 0.16, nivel: 'Avançado', horas: 60, capitulos: 8,
+    acesso: 'ebook', disponivel: true,
+    url: 'https://cursos.vargascode.com.br/cursos/curso-rag/',
+  },
+  {
     code: 'WEB',
     nome: 'Aplicações Web',
     subtitulo: 'HTML, CSS e JavaScript modernos',
@@ -172,19 +209,19 @@ const CURSOS = [
     url: 'https://cursos.vargascode.com.br/',
   },
   {
-    code: 'SREC',
-    nome: 'Sistemas de Recomendação',
-    subtitulo: 'Filtragem Colaborativa e Baseada em Conteúdo',
-    desc: 'Construa sistemas de recomendação do zero: filtragem colaborativa, baseada em conteúdo, fatoração de matrizes e avaliação de modelos.',
-    hue: 335, chroma: 0.15, nivel: 'Avançado', horas: 14, capitulos: 7,
-    acesso: 'gratuito', disponivel: false,
+    code: 'HARN',
+    nome: 'Harness Engineering',
+    subtitulo: 'Contexto · AGENTS.md · Arquitetura · Skills · Hooks · Subagentes · MCP',
+    desc: 'Monte, um componente por capítulo, o ambiente que faz um agente de IA programar do seu jeito: instruções, arquitetura, skills, hooks, subagentes e MCP — e use-o num projeto real.',
+    hue: 95, chroma: 0.15, nivel: 'Intermediário', horas: 40, capitulos: 8,
+    acesso: 'ebook', disponivel: false,
     url: 'https://cursos.vargascode.com.br/',
   },
 ];
 
 /* Coleções de storybooks de storybooks.vargascode.com.br — cada coleção reúne
    10 storybooks ilustrados; o primeiro título sai como amostra grátis e a
-   coleção completa é vendida na Hotmart. Preço único definido abaixo. */
+   coleção completa é vendida na Amazon e na Hotmart. Preço único definido abaixo. */
 const SB_BASE = 'https://storybooks.vargascode.com.br/';
 const PRECO_STORYBOOK = 'R$ 29,90';
 const COLECOES = [
@@ -192,6 +229,7 @@ const COLECOES = [
     nome: 'Heróis', amp: 'da', fim: 'Fé',
     lead: 'Dez histórias bíblicas reimaginadas em aquarela para tardes de leitura em família — a coragem, a fé e a esperança dos que andaram com Deus.',
     capa: 'storybook-colecao-herois/storybook-noe/images/noah_page1_good_man_1779073705704.png',
+    amazon: 'https://www.amazon.com.br/dp/B0HHM317VM',
     hotmart: 'https://pay.hotmart.com/Q106216283Q?off=2crregmg',
     cor: 'var(--colecao-herois)',
   },
@@ -199,6 +237,7 @@ const COLECOES = [
     nome: 'Discípulos', amp: 'de', fim: 'Jesus', qtd: 12,
     lead: 'Doze histórias dos discípulos de Jesus inspiradas na série The Chosen — homens comuns, de personalidades marcantes, que deixaram tudo para seguir o Messias.',
     capa: 'storybook-colecao-discipulos/storybook-pedro/images/pedro_page1.png',
+    amazon: 'https://www.amazon.com.br/dp/B0HHM5268F',
     hotmart: 'https://pay.hotmart.com/R106327299N',
     cor: 'var(--colecao-discipulos)',
   },
@@ -206,6 +245,7 @@ const COLECOES = [
     nome: 'Mulheres', amp: 'da', fim: 'Bíblia',
     lead: 'Dez histórias inspiradoras de mulheres de fé das Escrituras — lições de coragem, sabedoria e amor para ler e ouvir em família.',
     capa: 'storybook-colecao-mulheres/storybook-sara/images/sara_page1.png',
+    amazon: 'https://www.amazon.com.br/dp/B0HHM89KK3',
     hotmart: 'https://pay.hotmart.com/V106493775I',
     cor: 'var(--colecao-mulheres)',
   },
@@ -213,6 +253,7 @@ const COLECOES = [
     nome: 'Cidades', amp: 'da', fim: 'Bíblia',
     lead: 'Dez cidades das Escrituras e o que aconteceu entre seus muros — promessas, milagres e coragem, contados para ler e ouvir em família.',
     capa: 'storybook-colecao-cidades/storybook-belem/images/belem_page6.png',
+    amazon: 'https://www.amazon.com.br/dp/B0HHL5Y43L',
     hotmart: 'https://pay.hotmart.com/W106224495W?off=5fnkp8zn',
     cor: 'var(--colecao-cidades)',
   },
@@ -220,6 +261,7 @@ const COLECOES = [
     nome: 'Flores', amp: 'da', fim: 'Bíblia',
     lead: 'Dez flores e plantas das Escrituras e as lições que elas guardam — do cuidado de Deus à pureza do coração, em ilustrações delicadas.',
     capa: 'storybook-colecao-flores/storybook-lirio-dos-vales/images/lirio_page1_1779284455568.png',
+    amazon: 'https://www.amazon.com.br/dp/B0HHM7Y4T3',
     hotmart: 'https://pay.hotmart.com/E106224375C',
     cor: 'var(--colecao-flores)',
   },
@@ -227,6 +269,7 @@ const COLECOES = [
     nome: 'Águas', amp: 'da', fim: 'Bíblia',
     lead: 'Dez milagres e passagens extraordinárias que aconteceram nas águas das Escrituras — rios e mares que testemunharam o poder e o cuidado de Deus.',
     capa: 'storybook-colecao-aguas/storybook-mar-da-galileia/images/galileia_page1.png',
+    amazon: 'https://www.amazon.com.br/dp/B0HHLTD84T',
     hotmart: 'https://pay.hotmart.com/A106494310F',
     cor: 'var(--colecao-aguas)',
   },
@@ -252,12 +295,25 @@ function appCardEditorial(a) {
 }
 function bookCardEditorial(b) {
   const soon = b.disponivel === false;
-  const foot = soon
-    ? `<span class="ed-buy ed-buy--soon" aria-disabled="true">Em breve</span>`
-    : `<div class="ed-buy-row">
+  let foot;
+  if (soon) {
+    foot = `<span class="ed-buy ed-buy--soon" aria-disabled="true">Em breve</span>`;
+  } else {
+    const botoes = [];
+    if (b.amazon) {
+      botoes.push(`<a class="ed-buy" href="${b.amazon}" target="_blank" rel="noopener noreferrer">Amazon ↗</a>`);
+    }
+    if (b.google) {
+      botoes.push(`<a class="ed-buy ed-buy--alt" href="${b.google}" target="_blank" rel="noopener noreferrer">Google Play ↗</a>`);
+    }
+    if (botoes.length === 0 && b.url) {
+      botoes.push(`<a class="ed-buy" href="${b.url}" target="_blank" rel="noopener noreferrer">Comprar na ${b.loja || 'loja'} ↗</a>`);
+    }
+    foot = `<div class="ed-buy-row">
         <span class="ed-price">${b.preco}</span>
-        <a class="ed-buy" href="${b.url}" target="_blank" rel="noopener noreferrer">Comprar na ${b.loja} ↗</a>
+        <div class="ed-buy-group">${botoes.join('')}</div>
       </div>`;
+  }
   return `<article class="ed-book${soon ? ' is-soon' : ''}">
     <div class="ed-book-cover">
       <img src="${b.cover}" alt="${b.title}" loading="lazy">
@@ -314,6 +370,13 @@ function colecaoCardEditorial(col) {
   const capa = SB_BASE + col.capa;
   const amostra = SB_BASE + col.capa.replace(/\/images\/.*$/, '/storybook.html');
   const qtd = col.qtd || 10;
+  const botoes = [];
+  if (col.amazon) {
+    botoes.push(`<a class="ed-buy" href="${col.amazon}" target="_blank" rel="noopener noreferrer">Amazon ↗</a>`);
+  }
+  if (col.hotmart) {
+    botoes.push(`<a class="ed-buy ed-buy--alt" href="${col.hotmart}" target="_blank" rel="noopener noreferrer">Hotmart ↗</a>`);
+  }
   return `<article class="ed-sb" style="--sb-color:${col.cor}">
     <a class="ed-sb-cover" href="${amostra}" target="_blank" rel="noopener noreferrer">
       <img src="${capa}" alt="Coleção ${col.nome} ${col.amp} ${col.fim}" loading="lazy">
@@ -325,7 +388,7 @@ function colecaoCardEditorial(col) {
       <p class="ed-sb-desc">${col.lead}</p>
       <div class="ed-buy-row">
         <span class="ed-price">${PRECO_STORYBOOK}</span>
-        <a class="ed-buy" href="${col.hotmart}" target="_blank" rel="noopener noreferrer">Comprar na Hotmart ↗</a>
+        <div class="ed-buy-group">${botoes.join('')}</div>
       </div>
       <a class="ed-sb-cta" href="${SB_CATALOGO}" target="_blank" rel="noopener noreferrer">Ver no catálogo →</a>
     </div>
